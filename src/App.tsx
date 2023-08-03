@@ -1,15 +1,12 @@
 import "./App.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { BrowserRouter } from "react-router-dom";
+import { AppRoutes } from "./AppRoutes";
 
 function App() {
   return (
-    <div className="App">
-      <div>Hello World!</div>
-      <span>
-        <FontAwesomeIcon icon={faStar} />
-      </span>
-    </div>
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
   );
 }
 
