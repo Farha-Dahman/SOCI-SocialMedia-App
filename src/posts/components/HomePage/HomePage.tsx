@@ -1,7 +1,16 @@
 import React from "react";
+import Stories from "../Stories/Stories";
+import RecentPosts from "../RecentPosts/RecentPosts";
 
 const HomePage: React.FC = () => {
-  return <div>HomePage</div>;
+  return (
+    <>
+      <Stories />
+      <div id="posts" className="posts">
+        <RecentPosts />
+      </div>
+    </>
+  );
 };
 
 export default HomePage;

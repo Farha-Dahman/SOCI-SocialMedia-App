@@ -9,9 +9,13 @@ const MasterLayout: React.FC = () => {
   return (
     <>
       <Header />
-      <AppMenu />
-      <Outlet />
-      <AppSideBar />
+      <main id="main-content" className="flex-grow-1 d-flex">
+        <AppMenu />
+        <section id="content" className="content container-fluid pb-5">
+          <Outlet />
+        </section>
+        <AppSideBar />
+      </main>
       <Footer />
     </>
   );

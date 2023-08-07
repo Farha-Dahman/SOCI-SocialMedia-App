@@ -1,3 +1,290 @@
+$background-color: #fff;
+$primary-color: #6D3DDA;
+$text-color: #464544;
+$icon-color: #92918e;
+$background-color-light: #f1f0ed;
+$text-color-light: #8b8b8a;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
 body{
-    background-color: wheat;
+    background-color: $background-color;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+}
+
+li {
+    list-style-type: none;
+}
+ol, ul {
+    padding-left: 1rem;
+}
+a{
+    color: $text-color;
+    text-decoration: none;
+}
+
+@mixin person-img{
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+}
+
+@mixin font-style{
+    font-size: 14px;
+    font-weight: bold;
+}
+@mixin font-title{
+    @include font-style;
+    text-transform: uppercase;
+    color: $text-color-light;
+}
+@mixin story-image{
+    height: 150px;
+    width: 100%;
+    border-radius: 10px;
+    background-size: cover;
+}
+@mixin post-image{
+    height: 210px;
+    width: 100%;
+    border-radius: 6px;
+    background-size: cover;
+}
+@mixin logo-image{
+    width: 100%;
+    height: 50px;
+}
+nav {
+    .logo{
+        @include logo-image;
+    }
+    .profile_picture {
+        @include person-img;
+    }
+    a{
+        .icon{
+            color: $icon-color;
+            font-size: large;
+        }
+    }
+
+    .form-inputs{
+        position:relative;
+        width: 420px;
+        input{
+            height: 40px;
+            background-color: $background-color-light;
+            border-radius: 15px;
+
+            &:focus{
+                box-shadow:none;
+                border: 1px solid $primary-color;
+            }
+        } 
+        .icon {
+        position:absolute;
+        right: 10px;
+        color: $icon-color;
+    }
+}
+}
+#main-content{
+    flex: 1;
+    .menu-border{
+        border: 1px solid $background-color-light;
+    }
+
+    .app-menu{
+    color: $text-color;
+    .shortcuts{
+        .icon{
+            font-size: larger;
+            width: 20px;
+            color: $icon-color;
+        }
+    }
+    a{
+        div{
+            @include font-style;
+        }
+        span{
+            @include font-style;
+        }
+    }
+    }
+    .pages-liked{
+    img{
+        border-radius: 10px;
+        height: 30px;
+        width: 30px;
+    }
+    .title{
+        @include font-title;
+    }
+    span{
+        width: 30px;
+        height: 20px;
+        border-radius: 10px;
+        background-color: $primary-color;
+        color: #fff;
+    }
+    }
+
+    .content{
+    background-color: $background-color-light;
+    .Stories-container {
+        .angle{
+            height: 30px;
+            width: 30px;
+            line-height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            cursor: pointer;
+            top: 40%;
+            transform: translateY(-50%);
+            position: absolute;
+            z-index: 1;
+        }
+        i:last-child{
+            right: 326px;
+        }
+    }
+    .stories{
+        white-space: nowrap;
+        overflow: hidden;
+        .story{
+            cursor: pointer;
+            .storyImg{
+                @include story-image;
+            }
+            .profileImg{
+                @include person-img;
+                border: 2px solid $primary-color;
+            } 
+            .card-text{
+                font-size: x-small;
+                color: $background-color;
+            }
+            .user-Info{
+                bottom: 0;
+                margin-bottom: 10px;
+                margin-left: 4px;
+            }
+        }
+    }
+    #posts { 
+    .nav-tabs{
+        border: none;
+    }
+    .nav-link{
+    background: transparent;
+    color: $text-color-light;
+    border: none;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 0px 5px 0px 5px;
+    cursor: pointer;
+    outline: none;
+    transition: .3s ease;
+
+        &.active{
+        background-color: var(--main-color) !important;
+        color: $text-color !important;
+        border: none !important;
+        }
+    }
+    .post-content{
+        .card-item{
+            cursor: pointer;
+            border-radius: 4px;
+            height: 100%;
+            .post-Image{
+                @include post-image;
+                margin: 0;
+                }
+            }    
+        }
+        .desc{ 
+            img{
+                @include person-img;
+            }
+            p{
+            font-size: 15px;
+            font-weight: 400;
+            color: $text-color;
+            text-align: left;
+            margin-left: 0px;
+            line-height: 16px;
+            }
+            span {
+                font-size: 14px;
+                .icon{
+                    margin-right: 2px;
+                    font-weight: 600;
+                    color: $icon-color;
+                }
+            }
+            .card-text{
+                cite{
+                    color: $primary-color;
+                }
+            }
+        }
+    }
+    }
+    }
+
+
+    .friends{
+    border: 1px solid $background-color-light;
+    img{
+        @include person-img;
+    }
+    .title{
+        @include font-title;
+    }
+    .form-control{
+        border-radius: 0;
+    }
+    .icon {
+        left: 40px;
+        color: $icon-color;
+    }
+    ul{
+        width: 100%;
+    }
+    .active{
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: $primary-color;
+    }
+    .inactive{
+        font-size: x-small;
+        color: $text-color-light;
+    }
+    .name{
+        font-size: 14px;
+    }
+}
+
+footer{
+    @include font-style;
+    color: white;
+    background-color: $primary-color;
+    text-align: center;
+    img{
+        @include logo-image;
+    }
 }
