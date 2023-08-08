@@ -1,26 +1,11 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChartSimple,
-  faUsers,
-  faCalendar,
-  faFilm,
-  faImage,
-  faFileLines,
-  IconDefinition,
-} from "@fortawesome/free-solid-svg-icons";
-interface MenuItem {
+import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { menuItems } from "../../../../data/dummy-data";
+export interface MenuItem {
   icon: IconDefinition;
   text: string;
 }
-const menuItems: MenuItem[] = [
-  { icon: faChartSimple, text: "Feed" },
-  { icon: faUsers, text: "Friends" },
-  { icon: faCalendar, text: "Events" },
-  { icon: faFilm, text: "Watch Videos" },
-  { icon: faImage, text: "Photos" },
-  { icon: faFileLines, text: "Files" },
-];
 const MainMenu: React.FC = () => {
   return (
     <nav className="menu mt-4 mb-5 shortcuts ps-4">

@@ -9,12 +9,6 @@
         "plugin:react/recommended",
         "plugin:prettier/recommended"
      ], 
-    "eslint.validate": [
-        "javascript",
-        "javascriptreact",
-        "typescript",
-        "typescriptreact"
-    ],
     "parserOptions": {
         "ecmaVersion": "latest",
         "sourceType": "module"
