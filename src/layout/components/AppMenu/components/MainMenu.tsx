@@ -7,35 +7,29 @@ import {
   faFilm,
   faImage,
   faFileLines,
+  IconDefinition,
 } from "@fortawesome/free-solid-svg-icons";
-
+interface MenuItem {
+  icon: IconDefinition;
+  text: string;
+}
+const menuItems: MenuItem[] = [
+  { icon: faChartSimple, text: "Feed" },
+  { icon: faUsers, text: "Friends" },
+  { icon: faCalendar, text: "Events" },
+  { icon: faFilm, text: "Watch Videos" },
+  { icon: faImage, text: "Photos" },
+  { icon: faFileLines, text: "Files" },
+];
 const MainMenu: React.FC = () => {
   return (
     <nav className="menu mt-4 mb-5 shortcuts ps-4">
-      <a href="#" className="mb-3 d-flex align-items-center">
-        <FontAwesomeIcon icon={faChartSimple} className="icon me-3" />
-        <div>Feed</div>
-      </a>
-      <a href="#" className="mb-3 d-flex align-items-center">
-        <FontAwesomeIcon icon={faUsers} className="icon me-3" />
-        <div>Friends</div>
-      </a>
-      <a href="#" className="mb-3 d-flex align-items-center">
-        <FontAwesomeIcon icon={faCalendar} className="icon me-3" />
-        <div>Events</div>
-      </a>
-      <a href="#" className="mb-3 d-flex align-items-center">
-        <FontAwesomeIcon icon={faFilm} className="icon me-3" />
-        <div>Watch Videos</div>
-      </a>
-      <a href="#" className="mb-3 d-flex align-items-center">
-        <FontAwesomeIcon icon={faImage} className="icon me-3" />
-        <div>Photos</div>
-      </a>
-      <a href="#" className="mb-3 d-flex align-items-center">
-        <FontAwesomeIcon icon={faFileLines} className="icon me-3" />
-        <div>Files</div>
-      </a>
+      {menuItems.map((item, index) => (
+        <a href="#" className="mb-3 d-flex align-items-center" key={index}>
+          <FontAwesomeIcon icon={item.icon} className="icon me-3" />
+          <div>{item.text}</div>
+        </a>
+      ))}
     </nav>
   );
 };
