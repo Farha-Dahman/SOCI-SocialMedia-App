@@ -1,0 +1,15 @@
+$primary-color: #6D3DDA;
+$text-color-white: #ffff;
+$background-color: #f8f8f8;
+
+.login-form {
+    background-color: $background-color;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.Card--button{
+    border-radius: 30px;
+    color: $text-color-white;    
+    background-color: $primary-color;
+}
