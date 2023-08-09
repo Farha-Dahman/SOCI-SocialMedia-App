@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../Hooks/useUser";
+import LoginImage from "../../assets/images/LoginImage.png";
 const Login: React.FC = () => {
   let navigate = useNavigate();
   const { setUsername } = useUser();
@@ -11,30 +12,45 @@ const Login: React.FC = () => {
     navigate("/");
   };
   return (
-    <form className="login-form container p-5 border border-dark-subtle  w-50 mt-5 background-content">
-      <h2 className="mb-5">Enter to your account</h2>
-      <div className="mb-3">
-        <label htmlFor="exampleInputName" className="form-label">
-          Your Name
-        </label>
-        <input
-          type="text"
-          className="form-control"
-          id="exampleInputName"
-          aria-describedby="NameHelp"
-          placeholder="Enter your name"
-          value={usernameInput}
-          onChange={(e) => setUsernameInput(e.target.value)}
-        />
+    <>
+      <div className="container-fluid">
+        <div className="row justify-content-center align-items-center min-vh-100">
+          <div className="col-sm-12 col-md-6 col-lg-4">
+            <img
+              src={LoginImage}
+              alt="Login Image"
+              className="Login-Image mx-auto d-block"
+            />
+          </div>
+          <div className="col-sm-12 col-md-8 col-lg-6">
+            <form className="w-100 mx-auto login-form w-50 mx-3 border border-dark-subtle">
+              <h2 className="mb-5">Enter to your account</h2>
+              <div className="mb-3">
+                <label htmlFor="exampleInputName" className="form-label">
+                  Your Name
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="exampleInputName"
+                  aria-describedby="NameHelp"
+                  placeholder="Enter your name"
+                  value={usernameInput}
+                  onChange={(e) => setUsernameInput(e.target.value)}
+                />
+              </div>
+              <button
+                type="submit"
+                className="btn btn-light my-5 btn-lg Card--button"
+                onClick={handleLogin}
+              >
+                Log in
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
-      <button
-        type="submit"
-        className="btn btn btn-light my-5 me-2 btn-lg Card--button"
-        onClick={handleLogin}
-      >
-        Log in
-      </button>
-    </form>
+    </>
   );
 };
 
