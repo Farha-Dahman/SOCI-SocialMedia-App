@@ -2,6 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { faUserGroup, faGear, faBars } from "@fortawesome/free-solid-svg-icons";
+import { useAppStore } from "../../../../hooks/useAppStore";
 import {
   faUserPlus,
   faCommentDots,
@@ -9,6 +10,7 @@ import {
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 const Toolbar: React.FC = () => {
+  const { username } = useAppStore();
   return (
     <>
       <button
@@ -65,9 +67,9 @@ const Toolbar: React.FC = () => {
           <Link className="nav-link nav-item d-block d-lg-none me-md-2" to="#">
             <FontAwesomeIcon icon={faMagnifyingGlass} className="icon" />
           </Link>
-          <div className="nav-link nav-item dropdown">
+          <div className="nav-link nav-item dropdown d-flex align-items-center justify-content-items">
             <a
-              className="nav-link dropdown-toggle"
+              className="nav-link dropdown-toggle d-flex align-items-center"
               href="#"
               role="button"
               data-bs-toggle="dropdown"
@@ -76,8 +78,9 @@ const Toolbar: React.FC = () => {
               <img
                 src="https://api.dicebear.com/6.x/avataaars/svg?backgroundColor=c0aede&seed=lano"
                 alt="profile_picture"
-                className="profile_picture"
+                className="profile_picture me-1"
               />
+              <h6 className="mt-1">{username}</h6>
             </a>
             <ul className="dropdown-menu">
               <li>

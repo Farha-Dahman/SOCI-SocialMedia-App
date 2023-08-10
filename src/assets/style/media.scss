@@ -12,6 +12,14 @@
         flex-direction: column !important;
         justify-content: center;
     }
+    .login-image {
+        width: 330px;
+        height: 250px;
+    }
+    .login-form{
+        width: 100%;
+        margin: 0;
+    }
 }
 
 @media (max-width: 992px){
