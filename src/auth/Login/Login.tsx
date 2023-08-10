@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../../Hooks/useUser";
+import { useAppStore } from "../../hooks/useAppStore";
 import LoginImage from "../../assets/images/LoginImage.png";
 const Login: React.FC = () => {
   let navigate = useNavigate();
-  const { setUsername } = useUser();
+  const { setUsername } = useAppStore();
   const [usernameInput, setUsernameInput] = useState("");
 
   const handleLogin = () => {
@@ -19,7 +19,7 @@ const Login: React.FC = () => {
             <img
               src={LoginImage}
               alt="Login Image"
-              className="Login-Image mx-auto d-block"
+              className="login-image mx-auto d-block"
             />
           </div>
           <div className="col-sm-12 col-md-8 col-lg-6">
@@ -45,7 +45,7 @@ const Login: React.FC = () => {
               <div className="d-flex justify-content-center">
                 <button
                   type="submit"
-                  className="btn btn-light my-5 btn-lg Card--button fw-bold d-flex"
+                  className="btn btn-light my-5 btn-lg card-button fw-bold d-flex"
                   onClick={handleLogin}
                 >
                   Log in

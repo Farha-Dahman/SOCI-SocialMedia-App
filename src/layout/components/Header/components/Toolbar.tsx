@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { faUserGroup, faGear, faBars } from "@fortawesome/free-solid-svg-icons";
-import { useUser } from "../../../../Hooks/useUser";
+import { useAppStore } from "../../../../hooks/useAppStore";
 import {
   faUserPlus,
   faCommentDots,
@@ -10,7 +10,7 @@ import {
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 const Toolbar: React.FC = () => {
-  const { username } = useUser();
+  const { username } = useAppStore();
   return (
     <>
       <button

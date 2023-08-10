@@ -5,16 +5,16 @@ import AppMenu from "./components/AppMenu/AppMenu";
 import AppSideBar from "./components/AppSideBar/AppSideBar";
 import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../Hooks/useUser";
+import { useAppStore } from "../hooks/useAppStore";
 const MasterLayout: React.FC = () => {
-  const { username } = useUser();
+  const { username } = useAppStore();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!username) {
       navigate("/login");
     }
-  }, [username, navigate]);
+  }, [username]);
 
   return (
     <>

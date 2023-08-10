@@ -4,7 +4,7 @@ import { PageNotFound } from "./layout/components/PageNotFound/PageNotFound";
 import MasterLayout from "./layout/MasterLayout";
 import HomePage from "./posts/components/HomePage/HomePage";
 import Login from "./auth/Login/Login";
-import { UserProvider } from "./Context/UserContext";
+import { AppProvider } from "./context/app-store";
 
 export const AppRoutes: React.FC = () => {
   const routers = createBrowserRouter([
@@ -19,8 +19,8 @@ export const AppRoutes: React.FC = () => {
     { path: "/login", element: <Login /> },
   ]);
   return (
-    <UserProvider>
+    <AppProvider>
       <RouterProvider router={routers}></RouterProvider>
-    </UserProvider>
+    </AppProvider>
   );
 };
