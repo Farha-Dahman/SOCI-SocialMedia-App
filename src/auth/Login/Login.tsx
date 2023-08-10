@@ -23,11 +23,14 @@ const Login: React.FC = () => {
             />
           </div>
           <div className="col-sm-12 col-md-8 col-lg-6">
-            <form className="w-100 mx-auto login-form w-50 mx-3 border border-dark-subtle">
-              <h2 className="mb-5">Enter to your account</h2>
+            <form className="w-100 mx-auto login-form w-50 mx-3 mb-4 border border-dark-subtle">
+              <h2 className="mb-5 fw-bold">Access Your SOCI Account</h2>
               <div className="mb-3">
-                <label htmlFor="exampleInputName" className="form-label">
-                  Your Name
+                <label
+                  htmlFor="exampleInputName"
+                  className="form-label fw-bold"
+                >
+                  Name
                 </label>
                 <input
                   type="text"
@@ -39,13 +42,15 @@ const Login: React.FC = () => {
                   onChange={(e) => setUsernameInput(e.target.value)}
                 />
               </div>
-              <button
-                type="submit"
-                className="btn btn-light my-5 btn-lg Card--button"
-                onClick={handleLogin}
-              >
-                Log in
-              </button>
+              <div className="d-flex justify-content-center">
+                <button
+                  type="submit"
+                  className="btn btn-light my-5 btn-lg Card--button fw-bold d-flex"
+                  onClick={handleLogin}
+                >
+                  Log in
+                </button>
+              </div>
             </form>
           </div>
         </div>
