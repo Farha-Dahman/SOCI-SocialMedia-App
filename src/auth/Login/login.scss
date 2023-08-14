@@ -2,18 +2,20 @@ $primary-color: #6D3DDA;
 $secondary-color: #836eb4;
 $text-color-white: #ffff;
 $background-color: #eae5f7a9;
-
+@mixin card-button{
+    border-radius: 15px;
+    width: 220px;
+    color: $text-color-white;    
+    background-color: $primary-color;
+    justify-content: center;
+}
 .login-form {
     background-color: $background-color;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     .card-button{
-        border-radius: 15px;
-        width: 220px;
-        color: $text-color-white;    
-        background-color: $primary-color;
-        justify-content: center;
+       @include card-button;
         &:hover{
             background-color:$secondary-color;
         }

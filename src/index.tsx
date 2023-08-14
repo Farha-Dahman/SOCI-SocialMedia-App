@@ -4,13 +4,16 @@ import "bootstrap/dist/js/bootstrap.bundle.js";
 import "./assets/style/global.scss";
 import reportWebVitals from "./reportWebVitals";
 import { AppRoutes } from "./AppRoutes";
+import { AppProvider } from "./context/app-store";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
 );
 root.render(
   <React.StrictMode>
-    <AppRoutes />
+    <AppProvider>
+      <AppRoutes />
+    </AppProvider>
   </React.StrictMode>,
 );
 
