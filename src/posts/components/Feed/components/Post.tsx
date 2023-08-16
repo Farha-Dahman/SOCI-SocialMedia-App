@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHeart,
@@ -9,24 +9,34 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { PostProps } from "../../../../context/posts-store";
+import { Post as PostInfo } from "../../../types/types";
 dayjs.extend(relativeTime);
-const Post: React.FC<PostProps> = ({
-  user_name,
-  user_avatar,
-  body,
-  hashtags,
-  image_url,
-  likes,
-  comments,
-  shares,
-  timestamp,
-  country,
-  language,
-  is_verified,
-}) => {
-  const hashtagArray = hashtags.split(" ");
-  const formattedTimestamp = dayjs(timestamp).fromNow();
+
+const Post: React.FC<{ post: PostInfo }> = ({ post }) => {
+  const {
+    user_name,
+    user_avatar,
+    body,
+    hashtags,
+    image_url,
+    likes,
+    comments,
+    shares,
+    timestamp,
+    country,
+    language,
+    is_verified,
+  } = post;
+  const [hashtagList, setHashtagList] = useState<string[]>([]);
+  const [formattedTimestamp, setFormattedTimestamp] = useState<string>("");
+
+  useEffect(() => {
+    setHashtagList(hashtags.split(" "));
+  }, [hashtags]);
+
+  useEffect(() => {
+    setFormattedTimestamp(dayjs(timestamp).fromNow());
+  }, [timestamp]);
 
   return (
     <>
@@ -87,7 +97,7 @@ const Post: React.FC<PostProps> = ({
             </div>
             <article className="card-text">
               <span className="hashtags">
-                {hashtagArray.map((tag, index) => (
+                {hashtagList.map((tag, index) => (
                   <React.Fragment key={index}>
                     {index > 0 && " "}#{tag}
                   </React.Fragment>

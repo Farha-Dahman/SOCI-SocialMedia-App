@@ -2,20 +2,20 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppStore } from "../../hooks/useAppStore";
 
-const LogoutButton: React.FC = () => {
+const Logout: React.FC = () => {
   const navigate = useNavigate();
   const { setUsername } = useAppStore();
 
-  const handleLogout = () => {
+  const logout = () => {
     setUsername("");
     navigate("/login");
   };
 
   return (
-    <li className="dropdown-item" onClick={handleLogout}>
+    <li className="dropdown-item" onClick={logout}>
       Logout
     </li>
   );
 };
 
-export default LogoutButton;
+export default Logout;
