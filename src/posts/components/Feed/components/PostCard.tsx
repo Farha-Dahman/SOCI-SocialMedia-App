@@ -9,10 +9,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { Post as PostInfo } from "../../../types/types";
+import { Post } from "../../../types/types";
 dayjs.extend(relativeTime);
 
-const Post: React.FC<{ post: PostInfo }> = ({ post }) => {
+const PostCard: React.FC<{ post: Post }> = ({ post }) => {
   const {
     user_name,
     user_avatar,
@@ -27,17 +27,6 @@ const Post: React.FC<{ post: PostInfo }> = ({ post }) => {
     language,
     is_verified,
   } = post;
-  const [hashtagList, setHashtagList] = useState<string[]>([]);
-  const [formattedTimestamp, setFormattedTimestamp] = useState<string>("");
-
-  useEffect(() => {
-    setHashtagList(hashtags.split(" "));
-  }, [hashtags]);
-
-  useEffect(() => {
-    setFormattedTimestamp(dayjs(timestamp).fromNow());
-  }, [timestamp]);
-
   return (
     <>
       <article className="col-md-6 col-xl-6 col-xxl-4 py-2">
@@ -67,7 +56,9 @@ const Post: React.FC<{ post: PostInfo }> = ({ post }) => {
                   )}
                 </h6>
                 <div className="d-flex align-items-center justify-content-start mx-1">
-                  <div className="time-stamp p-auto m-0">{`Since ${formattedTimestamp}`}</div>
+                  <div className="time-stamp p-auto m-0">{`Since ${dayjs(
+                    timestamp,
+                  ).fromNow()}`}</div>
                   <span className="px-1 dot">.</span>
                   <span>
                     <FontAwesomeIcon
@@ -97,7 +88,7 @@ const Post: React.FC<{ post: PostInfo }> = ({ post }) => {
             </div>
             <article className="card-text">
               <span className="hashtags">
-                {hashtagList.map((tag, index) => (
+                {hashtags.split(" ").map((tag, index) => (
                   <React.Fragment key={index}>
                     {index > 0 && " "}#{tag}
                   </React.Fragment>
@@ -112,4 +103,4 @@ const Post: React.FC<{ post: PostInfo }> = ({ post }) => {
   );
 };
 
-export default Post;
+export default PostCard;

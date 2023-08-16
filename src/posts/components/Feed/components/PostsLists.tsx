@@ -1,22 +1,37 @@
 import React, { useEffect, useState } from "react";
-import Post from "./Post";
-import { Post as PostInfo } from "../../../types/types";
+import PostCard from "./PostCard";
+import { Post } from "../../../types/types";
 import Loading from "../../Loading";
+import axios from "axios";
+import { usePostsStore } from "../../../../context/posts-store";
 
-const PostsLists: React.FC<{ posts: PostInfo[] }> = ({ posts }) => {
+const API_URL = "https://mocki.io/v1/418eafe2-1002-4145-94f2-370a4eb34be8";
+
+const PostsLists: React.FC<{ posts: Post[] }> = ({ posts }) => {
+  const { setAllPosts } = usePostsStore();
   const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    if (posts.length > 0) {
+
+  const getPosts = async () => {
+    try {
+      const { data } = await axios.get(API_URL);
+      setAllPosts(data);
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error when fetching posts:", error);
       setIsLoading(false);
     }
-  }, [posts]);
+  };
+  useEffect(() => {
+    getPosts();
+  }, []);
+
   return (
     <div className="post-content container p-0">
       <div className="row">
         {isLoading ? (
           <Loading />
         ) : (
-          posts.map((post) => <Post key={post.user_id} post={post} />)
+          posts.map((post) => <PostCard key={post.user_id} post={post} />)
         )}
       </div>
     </div>
