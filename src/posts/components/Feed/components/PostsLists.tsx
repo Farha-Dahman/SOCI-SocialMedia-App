@@ -6,7 +6,8 @@ import axios from "axios";
 import { usePostsStore } from "../../../../context/posts-store";
 import { toast } from "react-toastify";
 
-const API_URL = "https://mocki.io/v1/418eafe2-1002-4145-94f2-370a4eb34be8";
+export const API_URL =
+  "https://mocki.io/v1/418eafe2-1002-4145-94f2-370a4eb34be8";
 
 const PostsLists: React.FC<{ posts: Post[] }> = ({ posts }) => {
   const { setAllPosts } = usePostsStore();
