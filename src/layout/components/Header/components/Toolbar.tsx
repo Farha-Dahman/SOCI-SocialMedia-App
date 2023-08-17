@@ -9,6 +9,7 @@ import {
   faBell,
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
+import Logout from "../../../../auth/Logout/Logout";
 const Toolbar: React.FC = () => {
   const { username } = useAppStore();
   return (
@@ -84,15 +85,19 @@ const Toolbar: React.FC = () => {
             </a>
             <ul className="dropdown-menu">
               <li>
-                <a className="dropdown-item" href="#">
+                <Link className="dropdown-item" to="#">
                   Profile
-                </a>
+                </Link>
               </li>
               <li>
-                <a className="dropdown-item" href="#">
+                <Link className="dropdown-item" to="#">
                   More
-                </a>
+                </Link>
               </li>
+              <li>
+                <hr className="dropdown-divider" />
+              </li>
+              <Logout />
             </ul>
           </div>
         </nav>

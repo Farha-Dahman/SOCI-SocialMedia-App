@@ -30,7 +30,11 @@ const Post: React.FC<PostProps> = ({
           />
           <div className="card-body px-2 py-2 desc">
             <div className="mb-3 w-100 d-flex d-xsm-block align-items-center justify-content-center">
-              <img src={profilePictureSrc} alt="profile_picture" />
+              <img
+                src={profilePictureSrc}
+                alt="profile_picture"
+                className="profile-picture"
+              />
               <h6 className="card-title ps-1">{username}</h6>
               <div className="content d-flex ms-auto bg-white">
                 <span className="d-flex align-items-center justify-content-center">

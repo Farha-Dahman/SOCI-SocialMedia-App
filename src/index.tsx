@@ -4,13 +4,19 @@ import "bootstrap/dist/js/bootstrap.bundle.js";
 import "./assets/style/global.scss";
 import reportWebVitals from "./reportWebVitals";
 import { AppRoutes } from "./AppRoutes";
+import { AppProvider } from "./context/app-store";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
 );
 root.render(
   <React.StrictMode>
-    <AppRoutes />
+    <AppProvider>
+      <AppRoutes />
+      <ToastContainer />
+    </AppProvider>
   </React.StrictMode>,
 );
 
