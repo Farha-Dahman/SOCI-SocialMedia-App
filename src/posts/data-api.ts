@@ -6,16 +6,16 @@ const POSTS_KEY = "postsData";
 export const getAllPosts = async (): Promise<Post[]> => {
   await sleep(2000);
   const storedPosts = localStorage.getItem(POSTS_KEY);
-  return storedPosts ? JSON.parse(storedPosts) : [];
+  return JSON.parse(storedPosts || "[]") as Post[];
 };
 
 export const getPost = async (id: number): Promise<Post | undefined> => {
-    await sleep(2000);
-    const storedPosts = localStorage.getItem(POSTS_KEY);
-    if (storedPosts){
-      const postsList: Post[] = JSON.parse(storedPosts);
-      return postsList.find( post => post.user_id === id);
-    }
+  await sleep(2000);
+  const storedPosts = localStorage.getItem(POSTS_KEY);
+  if (storedPosts) {
+    const postsList: Post[] = JSON.parse(storedPosts);
+    return postsList.find((post) => post.user_id === id);
+  }
 };
 
 export const addPost = async (post: Post): Promise<void> => {
@@ -23,7 +23,7 @@ export const addPost = async (post: Post): Promise<void> => {
   const storedPosts = localStorage.getItem(POSTS_KEY);
   const convertedPosts = storedPosts ? JSON.parse(storedPosts) : [];
   convertedPosts.push(post);
-  localStorage.setItem(POSTS_KEY, JSON.stringify(convertedPosts));
+  setPosts(convertedPosts);
 };
 
 export const removePost = async (id: number): Promise<void> => {
@@ -31,10 +31,14 @@ export const removePost = async (id: number): Promise<void> => {
   const storedPosts = localStorage.getItem(POSTS_KEY);
   if (storedPosts) {
     const postsList: Post[] = JSON.parse(storedPosts);
-    const index = postsList.findIndex(post => post.user_id === id);
+    const index = postsList.findIndex((post) => post.user_id === id);
     if (index !== -1) {
       postsList.splice(index, 1);
-      localStorage.setItem(POSTS_KEY, JSON.stringify(postsList));
+      setPosts(postsList);
     }
   }
+};
+
+export const setPosts = (posts: Post[]): void => {
+  localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
 };
