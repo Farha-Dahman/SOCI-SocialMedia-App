@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { getPost } from "../../data-api";
 import { Post } from "../../types/types";
 import Loading from "../Loading";
+import "../PostDetails/PostDetails.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCertificate,
@@ -17,7 +18,7 @@ import dayjs from "dayjs";
 
 const PostDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const parsedId = parseInt(id || "", 10);
+  const parsedId = +id!;
   const [post, setPost] = useState<Post | undefined>(undefined);
   const [showImageOverlay, setShowImageOverlay] = useState(false);
 
@@ -33,12 +34,10 @@ const PostDetails: React.FC = () => {
     fetchPost();
   }, [id]);
 
-  if (!post) {
-    return <Loading />;
-  }
+  if (!post) return <Loading />;
 
   return (
-    <div className="container-fluid desc mt-4 bg-details py-3">
+    <div className="container-fluid desc mt-4 bg-details">
       <div className="row justify-content-center">
         <div className="col-sm-12 col-md-12 col-lg-7 bg-img-details">
           <div className="img-con justify-content-center align-items-center d-flex">
