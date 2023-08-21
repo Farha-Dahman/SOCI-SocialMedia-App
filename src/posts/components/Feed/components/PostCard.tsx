@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHeart,
@@ -10,6 +10,7 @@ import {
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { Post } from "../../../types/types";
+import { Link } from "react-router-dom";
 dayjs.extend(relativeTime);
 
 const PostCard: React.FC<{ post: Post }> = ({ post }) => {
@@ -31,17 +32,19 @@ const PostCard: React.FC<{ post: Post }> = ({ post }) => {
     <>
       <article className="col-md-6 col-xl-6 col-xxl-4 py-2">
         <div className="card-item bg-white">
-          <img
-            src={image_url}
-            className="post-Image w-100 p-1"
-            alt="post image"
-          />
+          <Link to={`/posts/${post.user_id}`}>
+            <img
+              src={image_url}
+              className="post-Image w-100 p-1"
+              alt="post image"
+            />
+          </Link>
           <div className="card-body px-2 py-2 desc">
             <div className="mb-3 w-100 d-flex d-xsm-block align-items-center justify-content-center">
               <img
                 src={user_avatar}
                 alt="profile_picture"
-                className="profile-picture"
+                className="profile-picture align-items-start"
               />
               <div>
                 <h6 className="card-title ps-1">
@@ -63,9 +66,9 @@ const PostCard: React.FC<{ post: Post }> = ({ post }) => {
                   <span>
                     <FontAwesomeIcon
                       icon={faEarthAmericas}
-                      className="icon"
-                      title={`${language !== null ? `${language}, ` : ""}${
-                        country !== null ? `${country}` : ""
+                      className="icon earth-icon"
+                      title={`${language !== null ? `${language}` : ""}${
+                        country !== null ? `, ${country}` : ""
                       }`}
                     />
                   </span>
@@ -86,7 +89,7 @@ const PostCard: React.FC<{ post: Post }> = ({ post }) => {
                 </span>
               </div>
             </div>
-            <article className="card-text">
+            <div className="card-text">
               <span className="hashtags">
                 {hashtags.split(" ").map((tag, index) => (
                   <React.Fragment key={index}>
@@ -95,7 +98,7 @@ const PostCard: React.FC<{ post: Post }> = ({ post }) => {
                 ))}
               </span>
               <p className="mt-2">{body}</p>
-            </article>
+            </div>
           </div>
         </div>
       </article>

@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import "@fortawesome/fontawesome-svg-core/styles.css";
 import "bootstrap/dist/js/bootstrap.bundle.js";
 import "./assets/style/global.scss";
 import reportWebVitals from "./reportWebVitals";

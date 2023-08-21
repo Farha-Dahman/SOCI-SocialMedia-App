@@ -1,0 +1,132 @@
+$primary-color: #6d3dda;
+$secondary-color: #836eb4;
+$bg-color-light: #e6e6e6;
+$bg-color-dark: #c7c7c7;
+
+.postDetails-image {
+    cursor: pointer;
+}
+.img-con{
+    height: 100%;
+    width: 100%;
+    background-color: #0000006b;
+}
+.htt {
+    height: 100%;
+}
+.reactions {
+    border-radius: 30px;
+    border-color: $primary-color !important;
+    h6 {
+        color: $secondary-color;
+    }
+}
+.like-hover {
+    &:hover {
+        background-color: #9f92bd;
+        cursor: pointer;
+        color: #fff;
+        border-top-left-radius: 185px;
+        border-bottom-left-radius: 185px;
+        .like-icon {
+            color: #fff !important;
+        }
+        h6 {
+            color: #fff;
+        }
+    }
+}
+.comment-hover {
+    &:hover {
+        background-color: #9f92bd;
+        cursor: pointer;
+        color: #fff;
+        border-top-right-radius: 185px;
+        border-bottom-right-radius: 185px;
+        .comment-icon {
+            color: #fff !important;
+        }
+        h6 {
+            color: #fff;
+        }
+    }
+}
+.color-border {
+    border-color: $primary-color !important;
+}
+.details-reaction {
+    .icon {
+        color: $secondary-color !important;
+    }
+    span {
+        color: $secondary-color !important;
+    }
+}
+.input-group {
+    .icon {
+        color: #fff !important;
+    }
+    .comment {
+        background-color: $secondary-color;
+        border: none;
+        &:hover {
+            background-color: #fff;
+            border: 1px solid $secondary-color;
+            .icon {
+                color: $secondary-color !important;
+            }
+        }
+    }
+    .form-control {
+        box-shadow: none !important;
+        border-color: $secondary-color !important;
+    }
+}
+.comment-section {
+    background-color: $bg-color-dark;
+    border-radius: 5px;
+    .comment-content {
+        font-weight: bold;
+        font-size: small;
+    }
+}
+.scroll {
+    max-height: 250px;
+    overflow-y: auto;
+}
+.reaction-hover:hover {
+    background-color: $secondary-color;
+    color: #fff;
+    cursor: pointer;
+}
+.like-icon {
+    color: $secondary-color !important;
+}
+.comment-icon {
+    color: $secondary-color !important;
+}
+.bg-details {
+    background-color: $bg-color-light;
+}
+.bg-img-details {
+    color: $bg-color-dark;
+}
+//image full screen
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.overlay img {
+    width: 50%;
+    height: 50%;
+    object-fit: cover;
+}
