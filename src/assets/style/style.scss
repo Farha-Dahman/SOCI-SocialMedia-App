@@ -38,8 +38,9 @@ a {
 
 @mixin person-img {
     border-radius: 50%;
-    height: 30px;
-    width: 30px;
+    height: 35px;
+    width: 35px;
+    border: 1px solid rgb(206, 205, 205);
 }
 
 @mixin font-style {
@@ -211,7 +212,6 @@ nav {
 }
 .post-content {
     .card-item {
-        cursor: pointer;
         border-radius: 4px;
         height: 100%;
         .post-Image {
@@ -223,6 +223,13 @@ nav {
 .desc {
     .profile-picture {
         @include person-img;
+        cursor: pointer;
+    }
+    .card-title {
+        cursor: pointer;
+    }
+    .earth-icon {
+        cursor: pointer;
     }
     p {
         font-size: 15px;
@@ -246,28 +253,28 @@ nav {
         }
     }
 }
-.feed-buttons{
-    button{
+.feed-buttons {
+    button {
         background-color: $primary-color;
         color: $background-color;
         border-top-left-radius: 30px;
         border-bottom-right-radius: 30px;
         width: 150px;
-        &:hover{
+        &:hover {
             background-color: $secondary-color;
         }
     }
 }
-.certificate{
+.certificate {
     color: #007bff;
     width: 13px;
     height: 13px;
 }
-.time-stamp{
+.time-stamp {
     font-size: 12px;
     color: $text-color-light;
 }
-.dot{
+.dot {
     color: $icon-color;
 }
 .friends {
