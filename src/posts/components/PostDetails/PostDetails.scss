@@ -8,11 +8,7 @@ $bg-color-dark: #c7c7c7;
 }
 .img-con{
     height: 100%;
-    width: 100%;
     background-color: #0000006b;
-}
-.htt {
-    height: 100%;
 }
 .reactions {
     border-radius: 30px;
@@ -107,6 +103,7 @@ $bg-color-dark: #c7c7c7;
 }
 .bg-details {
     background-color: $bg-color-light;
+    height: 75%;
 }
 .bg-img-details {
     color: $bg-color-dark;
