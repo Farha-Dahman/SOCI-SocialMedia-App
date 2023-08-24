@@ -319,3 +319,25 @@ footer {
         @include logo-image;
     }
 }
+.add-post-button {
+    position: fixed;
+    bottom: 12%;
+    right: 27%;
+    z-index: 999;
+    background-color: $primary-color;
+    color: $background-color;
+    font-size: xx-large;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    &:hover{
+        background-color: $secondary-color;
+    }
+}
+.app-post{
+    background-color: $primary-color;
+    color: $background-color;
+    &:hover{
+        background-color: $secondary-color;
+    }
+}

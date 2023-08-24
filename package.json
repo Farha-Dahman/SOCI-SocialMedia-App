@@ -17,6 +17,9 @@
     "axios": "^1.4.0",
     "bootstrap": "^5.3.1",
     "dayjs": "^1.11.9",
+    "formik": "^2.4.3",
+    "primeicons": "^6.0.1",
+    "primereact": "^9.6.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
@@ -26,6 +29,7 @@
     "sass": "^1.64.2",
     "typescript": "*",
     "web-vitals": "^2.1.4",
+    "yup": "^1.2.0",
     "zustand": "^4.4.1"
   },
   "scripts": {

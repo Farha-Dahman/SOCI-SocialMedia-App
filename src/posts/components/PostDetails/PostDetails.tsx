@@ -58,7 +58,7 @@ const PostDetails: React.FC = () => {
               </div>
             )}
           </div>
-          <div className="col-sm-12 col-md-12 col-lg-5">
+          <div className="col-sm-12 col-md-12 col-lg-5 bg-details">
             <div className="d-flex d-xsm-block mt-2">
               <img
                 src={post.user_avatar}

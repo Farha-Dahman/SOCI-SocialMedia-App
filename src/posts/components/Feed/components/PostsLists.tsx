@@ -5,6 +5,9 @@ import Loading from "../../Loading";
 import axios from "axios";
 import { usePostsStore } from "../../../../context/posts-store";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 export const API_URL =
   "https://mocki.io/v1/418eafe2-1002-4145-94f2-370a4eb34be8";
@@ -34,9 +37,16 @@ const PostsLists: React.FC<{ posts: Post[] }> = ({ posts }) => {
         {isLoading ? (
           <Loading />
         ) : (
-          posts.map((post) => <PostCard key={post.user_id} post={post} />)
+          posts.map((post, index) => <PostCard key={index} post={post} />)
         )}
       </div>
+      <Link
+        to="/addpost"
+        title="add post"
+        className="add-post-button border text-center justify-content-center align-items-center d-flex"
+      >
+        <FontAwesomeIcon icon={faPlus} />
+      </Link>
     </div>
   );
 };

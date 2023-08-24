@@ -20,6 +20,10 @@
         width: 100%;
         margin: 0;
     }
+    .add-post-button {
+        bottom: 27%;
+        right: 5%;
+    }
 }
 
 @media (max-width: 992px){
@@ -50,5 +54,9 @@
     }
     nav{
         z-index: 1000; 
+    }
+    .add-post-button {
+        bottom: 27%;
+        right: 3%;
     }
 }

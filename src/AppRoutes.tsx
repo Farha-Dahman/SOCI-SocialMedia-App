@@ -7,6 +7,7 @@ import Login from "./auth/Login/Login";
 import { AppProvider } from "./context/app-store";
 import Feed from "./posts/components/Feed/Feed";
 import PostDetails from "./posts/components/PostDetails/PostDetails";
+import CreatePost from "./posts/components/CreatePost/CreatePost";
 
 export const AppRoutes: React.FC = () => {
   const routers = createBrowserRouter([
@@ -17,6 +18,7 @@ export const AppRoutes: React.FC = () => {
         { index: true, element: <Feed /> },
         { path: "/home", element: <HomePage /> },
         { path: "/posts/:id", element: <PostDetails /> },
+        { path: "/addpost", element: <CreatePost /> },
         { path: "*", element: <PageNotFound /> },
       ],
     },
