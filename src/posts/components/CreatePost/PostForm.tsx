@@ -31,7 +31,7 @@ const PostForm: React.FC<PostFormProps> = ({ addPostFunc }) => {
   return (
     <Formik
       initialValues={{
-        user_id: 101,
+        user_id: Math.floor(Math.random() * 10000),
         user_name: storedUserName || "",
         user_avatar: defaultAvatar,
         title: "",
@@ -113,7 +113,9 @@ const PostForm: React.FC<PostFormProps> = ({ addPostFunc }) => {
                         cols={30}
                         className="form-control"
                       />
-                      <label htmlFor="body">What&apos;s on your mind?</label>
+                      <label htmlFor="body">
+                        What&apos;s on your mind, {`${storedUserName}` + "?"}
+                      </label>
                     </span>
                     <ErrorMessage
                       name="body"
