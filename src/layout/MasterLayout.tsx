@@ -6,9 +6,6 @@ import AppSideBar from "./components/AppSideBar/AppSideBar";
 import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAppStore } from "../hooks/useAppStore";
-import { usePostsStore } from "../context/posts-store";
-import { toast } from "react-toastify";
-import { getAllPosts, setPosts } from "../posts/data-api";
 
 const MasterLayout: React.FC = () => {
   const { username } = useAppStore();
@@ -19,26 +16,6 @@ const MasterLayout: React.FC = () => {
       navigate("/login");
     }
   }, [username]);
-
-  const { setAllPosts } = usePostsStore();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const postsData = await getAllPosts();
-        if (!postsData) {
-          throw new Error("No data fetched");
-        }
-        setPosts(postsData);
-        setAllPosts(postsData);
-      } catch (error) {
-        console.error("Error when fetching the posts:", error);
-        toast.error("Oops! Something went wrong while fetching posts.");
-      }
-    };
-    fetchData();
-  }, [setAllPosts]);
-
   return (
     <>
       <Header />

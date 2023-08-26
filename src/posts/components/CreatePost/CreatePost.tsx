@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import PostForm from "./PostForm";
 import { Post } from "../../types/types";
 import { addPost, getAllPosts } from "../../data-api";

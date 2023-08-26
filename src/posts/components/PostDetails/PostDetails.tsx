@@ -37,7 +37,7 @@ const PostDetails: React.FC = () => {
   if (!post) return <Loading />;
 
   return (
-    <div className="vh-100 mb-5">
+    <div className="flex-grow-1 mb-5 vh-lg-100">
       <div className="container-fluid desc mt-4 bg-details">
         <div className="row justify-content-center h-100">
           <div className="col-sm-12 col-md-12 col-lg-7 bg-img-details ps-0">
@@ -58,7 +58,7 @@ const PostDetails: React.FC = () => {
               </div>
             )}
           </div>
-          <div className="col-sm-12 col-md-12 col-lg-5 bg-details">
+          <div className="col-sm-12 col-md-12 col-lg-5 mb-5 vh-100">
             <div className="d-flex d-xsm-block mt-2">
               <img
                 src={post.user_avatar}

@@ -2,6 +2,8 @@ import { Post } from "./types/types";
 import { sleep } from "../helpers/utils";
 
 export const POSTS_KEY = "postsData";
+export const API_URL =
+  "https://mocki.io/v1/418eafe2-1002-4145-94f2-370a4eb34be8";
 
 export const getAllPosts = async (): Promise<Post[] | undefined> => {
   try {

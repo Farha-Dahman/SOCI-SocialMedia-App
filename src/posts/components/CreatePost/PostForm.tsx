@@ -98,9 +98,12 @@ const PostForm: React.FC<PostFormProps> = ({ addPostFunc }) => {
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                           handleChange(e)
                         }
-                        className="form-control"
+                        className="form-control hashtags-input"
                       />
-                      <label htmlFor="hashtags">But your hashtags here</label>
+                      <label htmlFor="hashtags">
+                        Put your hashtags here (please don&apos;t use
+                        &apos;#&apos; tag).
+                      </label>
                     </span>
                   </div>
                   <div className="justify-content-center w-100 mt-4">
@@ -144,13 +147,13 @@ const PostForm: React.FC<PostFormProps> = ({ addPostFunc }) => {
                       <label
                         htmlFor="image_url"
                         className="custom-txt d-flex align-items-end"
-                        title="Upload Image"
+                        title="Upload Photo"
                       >
                         <FontAwesomeIcon
                           icon={faImage}
                           className="me-2 gallery align-items-center"
                         />
-                        Upload Image
+                        Upload Photo
                       </label>
                       <input
                         type="file"
@@ -158,7 +161,7 @@ const PostForm: React.FC<PostFormProps> = ({ addPostFunc }) => {
                         name="image_url"
                         accept="image/*"
                         onChange={(e) => handleImageChange(e)}
-                        style={{ display: "none" }}
+                        className="display-none"
                       />
                     </div>
                     <div className="col-sm-12 col-md-8">
@@ -176,28 +179,7 @@ const PostForm: React.FC<PostFormProps> = ({ addPostFunc }) => {
                     </div>
                   </div>
                 </div>
-                <div className="row d-flex">
-                  <div className="col-sm-12 col-md-6 mt-4">
-                    <Dropdown
-                      id="language"
-                      name="language"
-                      value={values.language}
-                      options={languages.map((language) => ({
-                        label: language,
-                        value: language,
-                      }))}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      placeholder="Select your language"
-                      filter
-                      className="w-75 md:w-14rem"
-                    />
-                    <ErrorMessage
-                      name="language"
-                      component="div"
-                      className="error text-start ms-5"
-                    />
-                  </div>
+                <div className="row">
                   <div className="col-sm-12 col-lg-6 mt-4">
                     <Dropdown
                       id="country"
@@ -215,6 +197,27 @@ const PostForm: React.FC<PostFormProps> = ({ addPostFunc }) => {
                     />
                     <ErrorMessage
                       name="country"
+                      component="div"
+                      className="error text-start ms-5"
+                    />
+                  </div>
+                  <div className="col-sm-12 col-lg-6 mt-4">
+                    <Dropdown
+                      id="language"
+                      name="language"
+                      value={values.language}
+                      options={languages.map((language) => ({
+                        label: language,
+                        value: language,
+                      }))}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      placeholder="Select your language"
+                      filter
+                      className="w-75 md:w-14rem"
+                    />
+                    <ErrorMessage
+                      name="language"
                       component="div"
                       className="error text-start ms-5"
                     />
