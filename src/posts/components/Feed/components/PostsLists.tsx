@@ -7,13 +7,15 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { getAllPosts } from "../../../data-api";
+import { usePostsStore } from "../../../../context/posts-store";
 
 const PostsLists: React.FC<{ posts: Post[] }> = ({ posts }) => {
   const [isLoading, setIsLoading] = useState(true);
-
+  const { setAllPosts } = usePostsStore();
   const getPosts = async () => {
     try {
-      await getAllPosts();
+      const allPosts = (await getAllPosts()) || [];
+      setAllPosts(allPosts);
       setIsLoading(false);
     } catch (error) {
       console.error("Error when fetching posts:", error);

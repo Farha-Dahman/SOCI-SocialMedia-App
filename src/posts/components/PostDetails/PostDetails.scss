@@ -5,7 +5,7 @@ $bg-color-dark: #c7c7c7;
 
 .postDetails-image {
     cursor: pointer;
-    min-width: 100%;
+    max-width: 100%;
     max-height: 100%;
 }
 .img-con {
@@ -129,4 +129,3 @@ $bg-color-dark: #c7c7c7;
     height: 75%;
     object-fit: fill;
 }
-

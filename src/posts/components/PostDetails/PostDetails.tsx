@@ -37,7 +37,7 @@ const PostDetails: React.FC = () => {
   if (!post) return <Loading />;
 
   return (
-    <div className="flex-grow-1 mb-5 vh-lg-100">
+    <div className="mb-5 vh-lg-100 w-100">
       <div className="container-fluid desc mt-4 bg-details">
         <div className="row justify-content-center h-100">
           <div className="col-sm-12 col-md-12 col-lg-7 bg-img-details ps-0">
