@@ -91,11 +91,12 @@ const PostCard: React.FC<{ post: Post }> = ({ post }) => {
             </div>
             <div className="card-text">
               <span className="hashtags">
-                {hashtags.split(" ").map((tag, index) => (
-                  <React.Fragment key={index}>
-                    {index > 0 && " "}#{tag}
-                  </React.Fragment>
-                ))}
+                {hashtags &&
+                  hashtags.split(" ").map((tag, index) => (
+                    <React.Fragment key={index}>
+                      {index > 0 && " "}#{tag}
+                    </React.Fragment>
+                  ))}
               </span>
               <p className="mt-2">{body}</p>
             </div>

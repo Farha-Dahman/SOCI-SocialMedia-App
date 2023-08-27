@@ -85,4 +85,39 @@ const friendsData = [
     seed: "Jerry",
   },
 ];
-export { menuItems, likedPages, friendsData };
+
+const countries = [
+  "Australia",
+  "Brazil",
+  "Palestine",
+  "Jordan",
+  "Egypt",
+  "China",
+  "Brazil",
+  "Germany",
+  "India",
+  "Spain",
+  "United States",
+];
+
+const languages = [
+  "English",
+  "Spanish",
+  "French",
+  "German",
+  "Chinese",
+  "Arabic",
+  "Russian",
+  "Japanese",
+  "Italian",
+  "Portuguese",
+  "Dutch",
+  "Korean",
+  "Turkish",
+  "Polish",
+  "Swedish",
+  "Danish",
+  "Norwegian",
+];
+
+export { menuItems, likedPages, friendsData, countries, languages };

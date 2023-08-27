@@ -1,0 +1,47 @@
+$bg-color-dark: #c7c7c7;
+$bg-color-light: #e6e6e6;
+$primary-color: #6d3dda;
+$secondary-color: #836eb4;
+$bg-form-color: #836eb479;
+$text-color: #ffff;
+$text-color-dark: #0000009f;
+
+.add-post-form {
+    background-color: $bg-color-light;
+    height: 100%;
+}
+.add-post-submit {
+    background-color: $primary-color;
+    color: $text-color;
+    font-size: large;
+    &:hover {
+        background-color: $secondary-color;
+    }
+}
+.post-container {
+    background-color: $bg-form-color;
+    border-radius: 15px;
+}
+.custom-txt {
+    font-size: small;
+    color: $text-color-dark;
+    cursor: pointer;
+}
+.gallery {
+    font-size: 20px;
+}
+.image-container {
+    width: 250px;
+    height: 150px;
+    overflow: hidden;
+}
+
+.selected-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background-repeat: no-repeat;
+}
+.display-none{
+    display: none;
+}

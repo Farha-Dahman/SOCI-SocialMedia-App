@@ -1,4 +1,9 @@
-import React, { createContext, useState, PropsWithChildren } from "react";
+import React, {
+  createContext,
+  useState,
+  PropsWithChildren,
+  useEffect,
+} from "react";
 
 export interface AppContextType {
   username: string;
@@ -8,7 +13,19 @@ export interface AppContextType {
 export const AppStore = createContext<AppContextType | undefined>(undefined);
 
 export const AppProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
-  const [username, setUsername] = useState("");
+  const [username, setUsernameState] = useState("");
+
+  useEffect(() => {
+    const storedUsername = localStorage.getItem("user_name");
+    if (storedUsername) {
+      setUsernameState(storedUsername);
+    }
+  }, []);
+
+  const setUsername = (newUsername: string) => {
+    localStorage.setItem("user_name", newUsername);
+    setUsernameState(newUsername);
+  };
 
   return (
     <AppStore.Provider
