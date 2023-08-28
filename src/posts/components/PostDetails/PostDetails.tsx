@@ -40,25 +40,33 @@ const PostDetails: React.FC = () => {
     <div className="mb-5 vh-lg-100 w-100">
       <div className="container-fluid desc mt-4 bg-details">
         <div className="row justify-content-center h-100">
-          <div className="col-sm-12 col-md-12 col-lg-7 bg-img-details ps-0">
-            <div className="img-con justify-content-center align-items-center d-flex">
-              <img
-                src={post.image_url}
-                className="postDetails-image"
-                alt="post image"
-                onClick={() => setShowImageOverlay(true)}
-              />
-            </div>
-            {showImageOverlay && (
-              <div
-                className="overlay"
-                onClick={() => setShowImageOverlay(false)}
-              >
-                <img src={post.image_url} alt="Post" />
+          {post.image_url !== "" ? (
+            <div className="col-sm-12 col-md-12 col-lg-7 bg-img-details ps-0">
+              <div className="img-con justify-content-center align-items-center d-flex">
+                <img
+                  src={post.image_url}
+                  className="postDetails-image"
+                  alt="post image"
+                  onClick={() => setShowImageOverlay(true)}
+                />
               </div>
-            )}
-          </div>
-          <div className="col-sm-12 col-md-12 col-lg-5 mb-5 vh-100">
+              {showImageOverlay && (
+                <div
+                  className="overlay"
+                  onClick={() => setShowImageOverlay(false)}
+                >
+                  <img src={post.image_url} alt="Post" />
+                </div>
+              )}
+            </div>
+          ) : (
+            <></>
+          )}
+          <div
+            className={`col-sm-12 col-md-12 ${
+              post.image_url ? "col-lg-5" : "px-5"
+            } mb-5 vh-100`}
+          >
             <div className="d-flex d-xsm-block mt-2">
               <img
                 src={post.user_avatar}

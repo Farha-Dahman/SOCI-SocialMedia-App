@@ -14,10 +14,10 @@ import defaultAvatar from "../../../assets/images/default-avatar.jpg";
 import { Chips, ChipsChangeEvent } from "primereact/chips";
 
 interface PostFormProps {
-  addPostFunc: (values: Post) => Promise<void>;
+  addNewPost: (values: Post) => Promise<void>;
 }
 
-const PostForm: React.FC<PostFormProps> = ({ addPostFunc }) => {
+const PostForm: React.FC<PostFormProps> = ({ addNewPost }) => {
   const [selectedImage, setSelectedImage] = useState<File | undefined>();
   const storedUserName = localStorage.getItem("user_name");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -57,12 +57,12 @@ const PostForm: React.FC<PostFormProps> = ({ addPostFunc }) => {
             reader.onload = () => {
               const dataURL = reader.result as string;
               values.image_url = dataURL;
-              addPostFunc(values);
+              addNewPost(values);
             };
             reader.readAsDataURL(selectedImage);
           } else {
             setIsSubmitting(true);
-            addPostFunc(values);
+            addNewPost(values);
           }
         } catch (error) {
           console.error("Error adding post:", error);

@@ -32,13 +32,17 @@ const PostCard: React.FC<{ post: Post }> = ({ post }) => {
     <>
       <article className="col-md-6 col-xl-6 col-xxl-4 py-2">
         <div className="card-item bg-white">
-          <Link to={`/posts/${post.user_id}`}>
-            <img
-              src={image_url}
-              className="post-Image w-100 p-1"
-              alt="post image"
-            />
-          </Link>
+          {image_url !== "" ? (
+            <Link to={`/posts/${post.user_id}`}>
+              <img
+                src={image_url}
+                className="post-Image w-100 p-1"
+                alt="post image"
+              />
+            </Link>
+          ) : (
+            <></>
+          )}
           <div className="card-body px-2 py-2 desc">
             <div className="mb-3 w-100 d-flex d-xsm-block align-items-center justify-content-center">
               <img
@@ -89,17 +93,19 @@ const PostCard: React.FC<{ post: Post }> = ({ post }) => {
                 </span>
               </div>
             </div>
-            <div className="card-text">
-              <span className="hashtags">
-                {hashtags &&
-                  hashtags.split(" ").map((tag, index) => (
-                    <React.Fragment key={index}>
-                      {index > 0 && " "}#{tag}
-                    </React.Fragment>
-                  ))}
-              </span>
-              <p className="mt-2">{body}</p>
-            </div>
+            <Link to={`/posts/${post.user_id}`}>
+              <div className="card-text">
+                <span className="hashtags">
+                  {hashtags &&
+                    hashtags.split(" ").map((tag, index) => (
+                      <React.Fragment key={index}>
+                        {index > 0 && " "}#{tag}
+                      </React.Fragment>
+                    ))}
+                </span>
+                <p className="mt-2">{body}</p>
+              </div>
+            </Link>
           </div>
         </div>
       </article>
