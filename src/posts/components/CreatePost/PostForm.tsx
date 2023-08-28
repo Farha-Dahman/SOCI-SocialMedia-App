@@ -11,6 +11,7 @@ import "./CreatePost.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 import defaultAvatar from "../../../assets/images/default-avatar.jpg";
+import { Chips, ChipsChangeEvent } from "primereact/chips";
 
 interface PostFormProps {
   addPostFunc: (values: Post) => Promise<void>;
@@ -19,6 +20,7 @@ interface PostFormProps {
 const PostForm: React.FC<PostFormProps> = ({ addPostFunc }) => {
   const [selectedImage, setSelectedImage] = useState<File | undefined>();
   const storedUserName = localStorage.getItem("user_name");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
@@ -50,6 +52,7 @@ const PostForm: React.FC<PostFormProps> = ({ addPostFunc }) => {
       onSubmit={async (values) => {
         try {
           if (selectedImage) {
+            setIsSubmitting(true);
             const reader = new FileReader();
             reader.onload = () => {
               const dataURL = reader.result as string;
@@ -58,6 +61,7 @@ const PostForm: React.FC<PostFormProps> = ({ addPostFunc }) => {
             };
             reader.readAsDataURL(selectedImage);
           } else {
+            setIsSubmitting(true);
             addPostFunc(values);
           }
         } catch (error) {
@@ -65,7 +69,7 @@ const PostForm: React.FC<PostFormProps> = ({ addPostFunc }) => {
         }
       }}
     >
-      {({ values, handleChange, handleBlur }) => (
+      {({ values, handleChange, handleBlur, setFieldValue }) => (
         <section className="h-100 d-flex mt-4 mb-5">
           <Form className="container-fluid add-post-form">
             <h4 className="mt-2">Create Your New Post!</h4>
@@ -90,21 +94,22 @@ const PostForm: React.FC<PostFormProps> = ({ addPostFunc }) => {
                       className="error text-start"
                     />
                   </div>
-                  <div className="justify-content-center w-100 mt-4">
-                    <span className="p-float-label">
-                      <InputText
-                        id="hashtags"
-                        value={values.hashtags}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                          handleChange(e)
-                        }
+                  <div className="w-100 mt-4">
+                    <label htmlFor="hashtags" className="form-label ms-2">
+                      Put your hashtags here (please don&apos;t use
+                      &apos;#&apos; tag).
+                    </label>
+                    <div className="card p-fluid">
+                      <Chips
+                        value={values.hashtags.split(" ")}
+                        onChange={(e: ChipsChangeEvent) => {
+                          const hashtagsArray = e.value ?? [];
+                          const hashtagsString = hashtagsArray.join(" ");
+                          setFieldValue("hashtags", hashtagsString);
+                        }}
                         className="form-control hashtags-input"
                       />
-                      <label htmlFor="hashtags">
-                        Put your hashtags here (please don&apos;t use
-                        &apos;#&apos; tag).
-                      </label>
-                    </span>
+                    </div>
                   </div>
                   <div className="justify-content-center w-100 mt-4">
                     <span className="p-float-label">
@@ -192,6 +197,7 @@ const PostForm: React.FC<PostFormProps> = ({ addPostFunc }) => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                       placeholder="Select your country"
+                      title="Select your country"
                       filter
                       className="w-75 md:w-14rem"
                     />
@@ -213,6 +219,7 @@ const PostForm: React.FC<PostFormProps> = ({ addPostFunc }) => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                       placeholder="Select your language"
+                      title="Select your language"
                       filter
                       className="w-75 md:w-14rem"
                     />
@@ -226,8 +233,18 @@ const PostForm: React.FC<PostFormProps> = ({ addPostFunc }) => {
                 <button
                   type="submit"
                   className="mt-5 w-50 btn add-post-submit fw-bold"
+                  disabled={isSubmitting}
                 >
                   Post
+                  {isSubmitting ? (
+                    <span
+                      className="spinner-border spinner-border-sm ms-1"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                  ) : (
+                    <></>
+                  )}
                 </button>
               </div>
             </div>

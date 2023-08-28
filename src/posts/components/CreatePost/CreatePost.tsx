@@ -17,6 +17,7 @@ const CreatePost: React.FC = () => {
       await addPost(updatedValues);
       const updatedPosts = (await getAllPosts()) || [];
       setAllPosts(updatedPosts);
+      console.log("setAllPosts from CreatePost");
       toast.success("Your Post was created!!");
       navigate("/");
     } catch (error) {

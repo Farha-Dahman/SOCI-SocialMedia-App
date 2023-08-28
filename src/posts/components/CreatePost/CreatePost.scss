@@ -1,10 +1,4 @@
-$bg-color-dark: #c7c7c7;
-$bg-color-light: #e6e6e6;
-$primary-color: #6d3dda;
-$secondary-color: #836eb4;
-$bg-form-color: #836eb479;
-$text-color: #ffff;
-$text-color-dark: #0000009f;
+@import "../../../assets/style/variables.scss";
 
 .add-post-form {
     background-color: $bg-color-light;
@@ -12,7 +6,7 @@ $text-color-dark: #0000009f;
 }
 .add-post-submit {
     background-color: $primary-color;
-    color: $text-color;
+    color: $text-color-create-post;
     font-size: large;
     &:hover {
         background-color: $secondary-color;
@@ -44,4 +38,10 @@ $text-color-dark: #0000009f;
 }
 .display-none{
     display: none;
+}
+.form-label{
+    color: $text-color-gray;
+    font-size: small;
+    display: block;
+    text-align: left;
 }

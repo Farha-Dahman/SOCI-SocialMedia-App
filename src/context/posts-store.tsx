@@ -10,8 +10,7 @@ interface PostsStore {
 
 export const usePostsStore = create<PostsStore>((set) => ({
   allPosts: [],
-  setAllPosts: (newPosts) =>
-    set((state) => ({ allPosts: [...state.allPosts, ...newPosts] })),
+  setAllPosts: (newPosts) => set({ allPosts: newPosts }),
   showVerifiedPosts: false,
   setShowVerifiedPosts: (showVerifiedPosts) =>
     set(() => ({ showVerifiedPosts })),
