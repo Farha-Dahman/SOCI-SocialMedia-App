@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppStore } from "../../hooks/useAppStore";
 import LoginImage from "../../assets/images/LoginImage.png";
-import { useFormik } from "formik"; // Remove ErrorMessage import
+import { useFormik } from "formik";
 import { loginSchema } from "../../schemas/login";
 
 const Login: React.FC = () => {

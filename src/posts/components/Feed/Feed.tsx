@@ -14,18 +14,6 @@ const Feed: React.FC = () => {
     ? allPosts.filter((post: Post) => post.is_verified)
     : allPosts;
 
-  // useEffect(() => {
-  //   const getPosts = async () => {
-  //     try {
-  //       const allPosts = (await getAllPosts()) || [];
-  //       setAllPosts(allPosts);
-  //     } catch (error) {
-  //       console.error("Error when fetching posts:", error);
-  //     }
-  //   };
-  //   getPosts();
-  // }, [setAllPosts]);
-
   return (
     <>
       <h3 className="mt-2">Recent Posts</h3>
