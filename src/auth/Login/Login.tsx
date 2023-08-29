@@ -4,21 +4,25 @@ import { useAppStore } from "../../hooks/useAppStore";
 import LoginImage from "../../assets/images/LoginImage.png";
 import { useFormik } from "formik";
 import { loginSchema } from "../../schemas/login";
+import { Checkbox } from "primereact/checkbox";
+import "../../assets/style/custom-checkbox.scss";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
-  const { setUsername } = useAppStore();
-
+  const { setUsername, setRole } = useAppStore();
+  const [selectedRole, setSelectedRole] = useState("user");
   const [usernameInput, setUsernameInput] = useState("");
 
   const sendData = () => {
     setUsername(usernameInput);
+    setRole(selectedRole);
     navigate("/");
   };
 
   const formik = useFormik({
     initialValues: {
       name: "",
+      role: "user",
     },
     validationSchema: loginSchema,
     onSubmit: sendData,
@@ -63,6 +67,23 @@ const Login: React.FC = () => {
                 <p className="text-danger mb-4 mt-0">{formik.errors.name}</p>
               )}
             </div>
+            <div className="custom-checkbox d-flex mt-2 me-5">
+              <Checkbox
+                id="is_Admin"
+                name="is_Admin"
+                value="is_Admin"
+                checked={selectedRole === "admin"}
+                onChange={() =>
+                  setSelectedRole(selectedRole === "admin" ? "user" : "admin")
+                }
+                title="I'm Admin"
+                className="custom-checkbox"
+              />
+              <label htmlFor="is_Admin" className="custom-txt fw-bold ms-2">
+                I&apos;m an Admin
+              </label>
+            </div>
+
             <div className="d-flex justify-content-center">
               <button
                 type="submit"

@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 import defaultAvatar from "../../../assets/images/default-avatar.jpg";
 import { Chips, ChipsChangeEvent } from "primereact/chips";
+import "../../../assets/style/custom-checkbox.scss";
 
 interface PostFormProps {
   addNewPost: (values: Post) => Promise<void>;
@@ -133,7 +134,7 @@ const PostForm: React.FC<PostFormProps> = ({ addNewPost }) => {
                   </div>
                   <div className="row d-flex align-items-end">
                     <div className="d-flex col-sm-12 col-md-4">
-                      <div className="d-flex mt-5 me-3">
+                      <div className="custom-checkbox d-flex mt-5 me-3">
                         <Checkbox
                           id="is_verified"
                           name="is_verified"
@@ -141,6 +142,7 @@ const PostForm: React.FC<PostFormProps> = ({ addNewPost }) => {
                           checked={values.is_verified}
                           onChange={handleChange}
                           title="Verified Post"
+                          className="custom-checkbox"
                         />
                         <label
                           htmlFor="is_verified"

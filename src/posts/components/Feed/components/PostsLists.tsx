@@ -14,7 +14,7 @@ import { getAllPosts } from "../../../data-api";
 const PostsLists: React.FC<{ posts: Post[] }> = ({ posts }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [first, setFirst] = useState<number>(0);
-  const [rows, setRows] = useState<number>(10);
+  const [rows, setRows] = useState<number>(12);
   const onPageChange = (event: PaginatorPageChangeEvent) => {
     setFirst(event.first);
     setRows(event.rows);

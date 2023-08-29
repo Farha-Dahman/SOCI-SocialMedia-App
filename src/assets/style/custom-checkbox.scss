@@ -1,0 +1,17 @@
+@import "variables";
+
+.custom-checkbox .p-checkbox-box {
+  background-color: $secondary-color;
+  border-color: $bg-color-dark;
+}
+.custom-checkbox .p-checkbox-box.p-highlight {
+  background-color: $primary-color;
+  border-color:  $secondary-color !important;
+}
+.custom-checkbox .p-checkbox-box.p-focus {
+  box-shadow: 0 0 0 2px $secondary-color !important;
+}
+.custom-checkbox .p-checkbox-box:hover {
+  background-color: $primary-color;
+  border-color: $secondary-color !important;
+}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getPost } from "../../data-api";
+import { Link, useParams } from "react-router-dom";
+import { getPost, removePost } from "../../data-api";
 import { Post } from "../../types/types";
 import Loading from "../Loading";
 import "../PostDetails/PostDetails.scss";
@@ -12,9 +12,12 @@ import {
   faComment as solidComment,
   faHeart as solidHeart,
   faPaperPlane,
+  faEllipsis,
 } from "@fortawesome/free-solid-svg-icons";
 import { FaRegHeart, FaRegComment } from "react-icons/fa";
 import dayjs from "dayjs";
+import Authorize from "../../../auth/Authorize/Authorize";
+import { toast } from "react-toastify";
 
 const PostDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -67,39 +70,75 @@ const PostDetails: React.FC = () => {
               post.image_url ? "col-lg-5" : "px-5"
             } mb-5 vh-100`}
           >
-            <div className="d-flex d-xsm-block mt-2">
-              <img
-                src={post.user_avatar}
-                alt="profile_picture"
-                className="profile-picture"
-              />
-              <div>
-                <h6 className="card-title ps-1">
-                  {post.user_name}
-                  {post.is_verified ? (
-                    <FontAwesomeIcon
-                      icon={faCertificate}
-                      className="certificate ms-1"
-                    />
-                  ) : (
-                    ""
-                  )}
-                </h6>
-                <div className="d-flex align-items-center justify-content-start mx-1">
-                  <div className="time-stamp p-auto m-0">{`Since ${dayjs(
-                    post.timestamp,
-                  ).fromNow()}`}</div>
-                  <span className="px-1 dot">.</span>
-                  <span>
-                    <FontAwesomeIcon
-                      icon={faEarthAmericas}
-                      className="icon earth-icon"
-                      title={`${
-                        post.language !== null ? `${post.language}` : ""
-                      }${post.country !== null ? `, ${post.country}` : ""}`}
-                    />
-                  </span>
+            <div className="d-flex justify-content-between align-items-center">
+              <div className="d-flex d-xsm-block mt-2">
+                <img
+                  src={post.user_avatar}
+                  alt="profile_picture"
+                  className="profile-picture"
+                />
+                <div>
+                  <h6 className="card-title ps-1">
+                    {post.user_name}
+                    {post.is_verified ? (
+                      <FontAwesomeIcon
+                        icon={faCertificate}
+                        className="certificate ms-1"
+                      />
+                    ) : (
+                      ""
+                    )}
+                  </h6>
+                  <div className="d-flex align-items-center justify-content-start mx-1">
+                    <div className="time-stamp p-auto m-0">{`Since ${dayjs(
+                      post.timestamp,
+                    ).fromNow()}`}</div>
+                    <span className="px-1 dot">.</span>
+                    <span>
+                      <FontAwesomeIcon
+                        icon={faEarthAmericas}
+                        className="icon earth-icon"
+                        title={`${
+                          post.language !== null ? `${post.language}` : ""
+                        }${post.country !== null ? `, ${post.country}` : ""}`}
+                      />
+                    </span>
+                  </div>
                 </div>
+              </div>
+              <div>
+                <FontAwesomeIcon
+                  icon={faEllipsis}
+                  className="nav-link dropdown-toggle d-flex align-items-center"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="true"
+                />
+                <ul className="dropdown-menu">
+                  <li>
+                    <Link className="dropdown-item" to="#" title="Save Post">
+                      Save Post
+                    </Link>
+                  </li>
+                  <li>
+                    <Authorize allowedRoles={["admin"]}>
+                      <Link
+                        className="dropdown-item"
+                        to="/"
+                        title="Delete Post"
+                        onClick={() => {
+                          removePost(post.user_id);
+                          toast.success(
+                            "The post has been successfully deleted!",
+                          );
+                        }}
+                      >
+                        Delete Post
+                      </Link>
+                    </Authorize>
+                  </li>
+                </ul>
               </div>
             </div>
             <article className="card-text mt-3">
