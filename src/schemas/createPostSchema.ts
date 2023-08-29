@@ -7,7 +7,7 @@ export const createPostSchema = Yup.object({
     .min(5, "Title must be at least 5 characters.")
     .max(50, "Title can't exceed 50 characters."),
   country: Yup.string()
-    .required("Country is required")
+    .required("Country is required.")
     .oneOf(countries, "Invalid country."),
   language: Yup.string()
     .required("Language is required.")

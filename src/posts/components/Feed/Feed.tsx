@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PostsLists from "./components/PostsLists";
 import { usePostsStore } from "../../../context/posts-store";
 import { Post } from "../../types/types";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { getAllPosts } from "../../data-api";
 
 const Feed: React.FC = () => {
-  const { allPosts, showVerifiedPosts, setShowVerifiedPosts } = usePostsStore();
+  const { allPosts, showVerifiedPosts, setShowVerifiedPosts, setAllPosts } =
+    usePostsStore();
   const filteredPosts = showVerifiedPosts
     ? allPosts.filter((post: Post) => post.is_verified)
     : allPosts;

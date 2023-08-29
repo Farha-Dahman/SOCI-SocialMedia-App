@@ -10,7 +10,7 @@ const CreatePost: React.FC = () => {
   const navigate = useNavigate();
   const { setAllPosts } = usePostsStore();
 
-  const addPostFunc = async (values: Post) => {
+  const addNewPost = async (values: Post) => {
     try {
       const randomUserId = Math.floor(Math.random() * 10000);
       const updatedValues = { ...values, user_id: randomUserId };
@@ -26,7 +26,7 @@ const CreatePost: React.FC = () => {
 
   return (
     <div className="h-100 mb-5">
-      <PostForm addPostFunc={addPostFunc} />
+      <PostForm addNewPost={addNewPost} />
     </div>
   );
 };

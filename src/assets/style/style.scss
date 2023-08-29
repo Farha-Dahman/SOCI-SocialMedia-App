@@ -1,10 +1,4 @@
-$background-color: #fff;
-$primary-color: #6d3dda;
-$secondary-color: #836eb4;
-$text-color: #464544;
-$icon-color: #92918e;
-$background-color-light: #f1f0ed;
-$text-color-light: #8b8b8a;
+@import "variables";
 
 * {
     margin: 0;
@@ -340,4 +334,7 @@ footer {
     &:hover{
         background-color: $secondary-color;
     }
+}
+.error{
+    color: $color-error;
 }
