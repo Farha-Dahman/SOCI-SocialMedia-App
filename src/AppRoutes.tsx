@@ -13,6 +13,7 @@ import { API_URL } from "./posts/data-api";
 import axios from "axios";
 import { usePostsStore } from "./context/posts-store";
 import SavedPost from "./posts/components/SavedPost/SavedPost";
+import ProtectedRoute from "./ProtectedRoute";
 
 export const AppRoutes: React.FC = () => {
   const { setAllPosts } = usePostsStore();
@@ -37,11 +38,46 @@ export const AppRoutes: React.FC = () => {
       path: "/",
       element: <MasterLayout />,
       children: [
-        { index: true, element: <Feed /> },
-        { path: "/home", element: <HomePage /> },
-        { path: "/posts/:id", element: <PostDetails /> },
-        { path: "/addpost", element: <CreatePost /> },
-        { path: "/savedPosts", element: <SavedPost /> },
+        {
+          index: true,
+          element: (
+            <ProtectedRoute>
+              <Feed />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/home",
+          element: (
+            <ProtectedRoute>
+              <HomePage />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/posts/:id",
+          element: (
+            <ProtectedRoute>
+              <PostDetails />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/addpost",
+          element: (
+            <ProtectedRoute>
+              <CreatePost />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/savedPosts",
+          element: (
+            <ProtectedRoute>
+              <SavedPost />
+            </ProtectedRoute>
+          ),
+        },
         { path: "*", element: <PageNotFound /> },
       ],
     },
