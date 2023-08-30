@@ -4,10 +4,11 @@ import { useAppStore } from "../../hooks/useAppStore";
 
 const Logout: React.FC = () => {
   const navigate = useNavigate();
-  const { setUsername } = useAppStore();
+  const { setUsername, setRole } = useAppStore();
 
   const logout = () => {
     setUsername("");
+    setRole("user");
     navigate("/login");
   };
 

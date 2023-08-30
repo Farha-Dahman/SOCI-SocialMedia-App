@@ -5,17 +5,15 @@ import AppMenu from "./components/AppMenu/AppMenu";
 import AppSideBar from "./components/AppSideBar/AppSideBar";
 import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useAppStore } from "../hooks/useAppStore";
 
 const MasterLayout: React.FC = () => {
-  const { username } = useAppStore();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!username) {
+    if (!localStorage.getItem("user_name")) {
       navigate("/login");
     }
-  }, [username]);
+  }, []);
   return (
     <>
       <Header />
