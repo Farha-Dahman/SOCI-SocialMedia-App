@@ -10,6 +10,7 @@ import { Paginator, PaginatorPageChangeEvent } from "primereact/paginator";
 import "./PostsList.scss";
 import { usePostsStore } from "../../../../context/posts-store";
 import { getAllPosts } from "../../../data-api";
+import dayjs from "dayjs";
 
 const PostsLists: React.FC<{ posts: Post[] }> = ({ posts }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -25,7 +26,12 @@ const PostsLists: React.FC<{ posts: Post[] }> = ({ posts }) => {
   const getPosts = async () => {
     try {
       const allPosts = (await getAllPosts()) || [];
-      setAllPosts(allPosts);
+      const sortedPosts = allPosts.sort((postA, postB) => {
+        const dateA = dayjs(postA.timestamp);
+        const dateB = dayjs(postB.timestamp);
+        return dateB.diff(dateA);
+      });
+      setAllPosts(sortedPosts);
       await getAllPosts();
       setIsLoading(false);
     } catch (error) {
