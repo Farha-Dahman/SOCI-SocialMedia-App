@@ -13,6 +13,8 @@ import {
   faHeart as solidHeart,
   faPaperPlane,
   faEllipsis,
+  faBookmark,
+  faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 import { FaRegHeart, FaRegComment } from "react-icons/fa";
 import dayjs from "dayjs";
@@ -117,7 +119,12 @@ const PostDetails: React.FC = () => {
                 />
                 <ul className="dropdown-menu">
                   <li>
-                    <Link className="dropdown-item" to="#" title="Save Post">
+                    <Link
+                      className="dropdown-item justify-content-center"
+                      to="#"
+                      title="Save Post"
+                    >
+                      <FontAwesomeIcon icon={faBookmark} className="me-2" />
                       Save Post
                     </Link>
                   </li>
@@ -134,6 +141,7 @@ const PostDetails: React.FC = () => {
                           );
                         }}
                       >
+                        <FontAwesomeIcon icon={faTrashCan} className="me-2" />
                         Delete Post
                       </Link>
                     </Authorize>

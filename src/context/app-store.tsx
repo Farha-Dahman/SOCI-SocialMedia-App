@@ -4,7 +4,6 @@ import React, {
   PropsWithChildren,
   useEffect,
 } from "react";
-import { encodeRole } from "../helpers/utils";
 
 export interface AppContextType {
   username: string;
@@ -34,8 +33,7 @@ export const AppProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   };
 
   const setRole = (newRole: string) => {
-    const encodedRole = encodeRole(newRole);
-    localStorage.setItem("user_role", encodedRole);
+    localStorage.setItem("user_role", newRole);
     setRoleState(newRole);
   };
 
