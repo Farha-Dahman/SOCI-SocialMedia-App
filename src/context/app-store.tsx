@@ -8,15 +8,15 @@ import React, {
 export interface AppContextType {
   username: string;
   setUsername: (username: string) => void;
-  role: string;
-  setRole: (role: string) => void;
+  role: "admin" | "user";
+  setRole: (role: "admin" | "user") => void;
 }
 
 export const AppStore = createContext<AppContextType | undefined>(undefined);
 
 export const AppProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   const [username, setUsernameState] = useState("");
-  const [role, setRoleState] = useState("");
+  const [role, setRoleState] = useState<"admin" | "user">("user");
   useEffect(() => {
     const storedUsername = localStorage.getItem("user_name");
     const storedRole = localStorage.getItem("user_role");
@@ -24,7 +24,7 @@ export const AppProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
       setUsernameState(storedUsername);
     }
     if (storedRole) {
-      setRoleState(storedRole);
+      setRoleState(storedRole as "admin" | "user");
     }
   }, []);
   const setUsername = (newUsername: string) => {
@@ -32,7 +32,7 @@ export const AppProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
     setUsernameState(newUsername);
   };
 
-  const setRole = (newRole: string) => {
+  const setRole = (newRole: "admin" | "user") => {
     localStorage.setItem("user_role", newRole);
     setRoleState(newRole);
   };

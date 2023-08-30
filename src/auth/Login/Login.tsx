@@ -15,7 +15,7 @@ const Login: React.FC = () => {
 
   const sendData = () => {
     setUsername(usernameInput);
-    setRole(selectedRole);
+    setRole(selectedRole as "admin" | "user");
     navigate("/");
   };
 

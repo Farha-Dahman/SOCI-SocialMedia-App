@@ -8,7 +8,7 @@ const Logout: React.FC = () => {
 
   const logout = () => {
     setUsername("");
-    setRole("");
+    setRole("user");
     navigate("/login");
   };
 

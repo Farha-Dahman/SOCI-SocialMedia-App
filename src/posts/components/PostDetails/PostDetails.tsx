@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { getPost, removePost } from "../../data-api";
 import { Post } from "../../types/types";
 import Loading from "../Loading";
@@ -9,8 +9,8 @@ import {
   faCertificate,
   faEarthAmericas,
   faShare,
-  faComment as solidComment,
-  faHeart as solidHeart,
+  faComment,
+  faHeart,
   faPaperPlane,
   faEllipsis,
   faBookmark,
@@ -26,6 +26,7 @@ const PostDetails: React.FC = () => {
   const parsedId = +id!;
   const [post, setPost] = useState<Post | undefined>(undefined);
   const [showImageOverlay, setShowImageOverlay] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -38,6 +39,12 @@ const PostDetails: React.FC = () => {
     };
     fetchPost();
   }, [id]);
+
+  const removePostButton = async (user_id: number) => {
+    await removePost(user_id);
+    toast.success("The post has been successfully deleted!");
+    navigate("/");
+  };
 
   if (!post) return <Loading />;
 
@@ -130,20 +137,14 @@ const PostDetails: React.FC = () => {
                   </li>
                   <li>
                     <Authorize allowedRoles={["admin"]}>
-                      <Link
+                      <button
                         className="dropdown-item"
-                        to="/"
                         title="Delete Post"
-                        onClick={() => {
-                          removePost(post.user_id);
-                          toast.success(
-                            "The post has been successfully deleted!",
-                          );
-                        }}
+                        onClick={() => removePostButton(post.user_id)}
                       >
                         <FontAwesomeIcon icon={faTrashCan} className="me-2" />
                         Delete Post
-                      </Link>
+                      </button>
                     </Authorize>
                   </li>
                 </ul>
@@ -161,12 +162,12 @@ const PostDetails: React.FC = () => {
             </article>
             <div className="d-flex ms-auto mt-5 justify-content-between details-reaction">
               <span className="d-flex align-items-center justify-content-center">
-                <FontAwesomeIcon icon={solidHeart} className="icon ps-2" />
+                <FontAwesomeIcon icon={faHeart} className="icon ps-2" />
                 {post.likes}
               </span>
               <div className="d-flex align-items-center justify-content-center">
                 <span>
-                  <FontAwesomeIcon icon={solidComment} className="icon ps-2" />
+                  <FontAwesomeIcon icon={faComment} className="icon ps-2" />
                   {post.comments}
                 </span>
                 <span>
