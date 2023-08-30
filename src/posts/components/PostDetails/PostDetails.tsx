@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getPost, removePost } from "../../data-api";
 import { Post } from "../../types/types";
 import Loading from "../Loading";
@@ -16,17 +16,38 @@ import {
   faBookmark,
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
-import { FaRegHeart, FaRegComment } from "react-icons/fa";
+import { FaRegHeart, FaRegComment, FaRegBookmark } from "react-icons/fa";
 import dayjs from "dayjs";
 import Authorize from "../../../auth/Authorize/Authorize";
 import { toast } from "react-toastify";
+import { usePostsStore } from "../../../context/posts-store";
 
 const PostDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const parsedId = +id!;
   const [post, setPost] = useState<Post | undefined>(undefined);
   const [showImageOverlay, setShowImageOverlay] = useState(false);
+  const { savedPosts, addSavedPost, removeSavedPost } = usePostsStore();
   const navigate = useNavigate();
+
+  const removePostButton = async (user_id: number) => {
+    await removePost(user_id);
+    toast.success("The post has been successfully deleted!");
+    navigate("/");
+  };
+  const savedPostButton = (post: Post) => {
+    if (!savedPosts.some((savedPost) => savedPost.user_id === post.user_id)) {
+      addSavedPost(post);
+      toast.success("The post has been successfully saved!");
+    }
+  };
+  const handleUnsavePost = (postId: number) => {
+    removeSavedPost(postId);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("savedPosts", JSON.stringify(savedPosts));
+  }, [savedPosts]);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -40,14 +61,10 @@ const PostDetails: React.FC = () => {
     fetchPost();
   }, [id]);
 
-  const removePostButton = async (user_id: number) => {
-    await removePost(user_id);
-    toast.success("The post has been successfully deleted!");
-    navigate("/");
-  };
-
   if (!post) return <Loading />;
-
+  const isPostSaved = savedPosts.some(
+    (savedPost) => savedPost.user_id === post.user_id,
+  );
   return (
     <div className="mb-5 vh-lg-100 w-100">
       <div className="container-fluid desc mt-4 bg-details">
@@ -126,14 +143,31 @@ const PostDetails: React.FC = () => {
                 />
                 <ul className="dropdown-menu">
                   <li>
-                    <Link
-                      className="dropdown-item justify-content-center"
-                      to="#"
-                      title="Save Post"
-                    >
-                      <FontAwesomeIcon icon={faBookmark} className="me-2" />
-                      Save Post
-                    </Link>
+                    {isPostSaved ? (
+                      <button
+                        className="dropdown-item justify-content-center"
+                        title="Unsave Post"
+                        onClick={() => {
+                          handleUnsavePost(post.user_id);
+                          toast.success(
+                            "The post has been successfully deleted from saved items!",
+                          );
+                          navigate("/savedPosts");
+                        }}
+                      >
+                        <FontAwesomeIcon icon={faBookmark} className="me-2" />
+                        Unsave Post
+                      </button>
+                    ) : (
+                      <button
+                        className="dropdown-item justify-content-center"
+                        title="Save Post"
+                        onClick={() => savedPostButton(post)}
+                      >
+                        <FaRegBookmark className="me-2" />
+                        Save Post
+                      </button>
+                    )}
                   </li>
                   <li>
                     <Authorize allowedRoles={["admin"]}>

@@ -12,6 +12,7 @@ import { setPosts } from "./posts/data-api";
 import { API_URL } from "./posts/data-api";
 import axios from "axios";
 import { usePostsStore } from "./context/posts-store";
+import SavedPost from "./posts/components/SavedPost/SavedPost";
 
 export const AppRoutes: React.FC = () => {
   const { setAllPosts } = usePostsStore();
@@ -40,6 +41,7 @@ export const AppRoutes: React.FC = () => {
         { path: "/home", element: <HomePage /> },
         { path: "/posts/:id", element: <PostDetails /> },
         { path: "/addpost", element: <CreatePost /> },
+        { path: "/savedPosts", element: <SavedPost /> },
         { path: "*", element: <PageNotFound /> },
       ],
     },
