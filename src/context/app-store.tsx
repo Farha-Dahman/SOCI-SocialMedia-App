@@ -4,6 +4,7 @@ import React, {
   PropsWithChildren,
   useEffect,
 } from "react";
+import Loading from "../posts/components/Loading";
 
 export interface AppContextType {
   username: string;
@@ -17,6 +18,7 @@ export const AppStore = createContext<AppContextType | undefined>(undefined);
 export const AppProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   const [username, setUsernameState] = useState("");
   const [role, setRoleState] = useState<"admin" | "user">("user");
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const storedUsername = localStorage.getItem("user_name");
     const storedRole = localStorage.getItem("user_role");
@@ -26,6 +28,7 @@ export const AppProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
     if (storedRole) {
       setRoleState(storedRole as "admin" | "user");
     }
+    setIsLoading(false);
   }, []);
   const setUsername = (newUsername: string) => {
     localStorage.setItem("user_name", newUsername);
@@ -46,7 +49,7 @@ export const AppProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
         setRole,
       }}
     >
-      {children}
+      {isLoading ? <Loading /> : children}
     </AppStore.Provider>
   );
 };

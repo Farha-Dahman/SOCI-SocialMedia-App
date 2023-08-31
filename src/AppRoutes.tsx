@@ -35,52 +35,36 @@ export const AppRoutes: React.FC = () => {
   }, []);
   const routers = createBrowserRouter([
     {
-      path: "/",
-      element: <MasterLayout />,
+      path: "",
+      element: (
+        <ProtectedRoute>
+          <MasterLayout />
+        </ProtectedRoute>
+      ),
       children: [
         {
           index: true,
-          element: (
-            <ProtectedRoute>
-              <Feed />
-            </ProtectedRoute>
-          ),
+          element: <Feed />,
         },
         {
           path: "/home",
-          element: (
-            <ProtectedRoute>
-              <HomePage />
-            </ProtectedRoute>
-          ),
+          element: <HomePage />,
         },
         {
           path: "/posts/:id",
-          element: (
-            <ProtectedRoute>
-              <PostDetails />
-            </ProtectedRoute>
-          ),
+          element: <PostDetails />,
         },
         {
           path: "/addpost",
-          element: (
-            <ProtectedRoute>
-              <CreatePost />
-            </ProtectedRoute>
-          ),
+          element: <CreatePost />,
         },
         {
           path: "/savedPosts",
-          element: (
-            <ProtectedRoute>
-              <SavedPost />
-            </ProtectedRoute>
-          ),
+          element: <SavedPost />,
         },
-        { path: "*", element: <PageNotFound /> },
       ],
     },
+    { path: "*", element: <PageNotFound /> },
     { path: "/login", element: <Login /> },
   ]);
   return (
