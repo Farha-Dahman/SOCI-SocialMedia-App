@@ -7,7 +7,7 @@ const SavedPost: React.FC = () => {
   const savedPostsList: Post[] = JSON.parse(savedPosts!);
 
   return (
-    <div className="post-content p-0">
+    <div className="post-content p-0 hight-container">
       <h3 className="mt-2">Saved Posts</h3>
       <div className="row">
         {savedPostsList.map((savedPost) => (

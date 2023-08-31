@@ -41,7 +41,7 @@ const PostDetails: React.FC = () => {
       toast.success("The post has been successfully saved!");
     }
   };
-  const handleUnsavePost = (postId: number) => {
+  const unSavePost = (postId: number) => {
     removeSavedPost(postId);
   };
 
@@ -148,7 +148,7 @@ const PostDetails: React.FC = () => {
                         className="dropdown-item justify-content-center"
                         title="Unsave Post"
                         onClick={() => {
-                          handleUnsavePost(post.user_id);
+                          unSavePost(post.user_id);
                           toast.success(
                             "The post has been successfully deleted from saved items!",
                           );
