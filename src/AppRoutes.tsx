@@ -12,6 +12,8 @@ import { setPosts } from "./posts/data-api";
 import { API_URL } from "./posts/data-api";
 import axios from "axios";
 import { usePostsStore } from "./context/posts-store";
+import SavedPost from "./posts/components/SavedPost/SavedPost";
+import ProtectedRoute from "./ProtectedRoute";
 
 export const AppRoutes: React.FC = () => {
   const { setAllPosts } = usePostsStore();
@@ -33,16 +35,36 @@ export const AppRoutes: React.FC = () => {
   }, []);
   const routers = createBrowserRouter([
     {
-      path: "/",
-      element: <MasterLayout />,
+      path: "",
+      element: (
+        <ProtectedRoute>
+          <MasterLayout />
+        </ProtectedRoute>
+      ),
       children: [
-        { index: true, element: <Feed /> },
-        { path: "/home", element: <HomePage /> },
-        { path: "/posts/:id", element: <PostDetails /> },
-        { path: "/addpost", element: <CreatePost /> },
-        { path: "*", element: <PageNotFound /> },
+        {
+          index: true,
+          element: <Feed />,
+        },
+        {
+          path: "/home",
+          element: <HomePage />,
+        },
+        {
+          path: "/posts/:id",
+          element: <PostDetails />,
+        },
+        {
+          path: "/addpost",
+          element: <CreatePost />,
+        },
+        {
+          path: "/savedPosts",
+          element: <SavedPost />,
+        },
       ],
     },
+    { path: "*", element: <PageNotFound /> },
     { path: "/login", element: <Login /> },
   ]);
   return (

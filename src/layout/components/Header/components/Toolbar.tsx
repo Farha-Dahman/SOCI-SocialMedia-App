@@ -90,8 +90,8 @@ const Toolbar: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link className="dropdown-item" to="#">
-                  More
+                <Link className="dropdown-item" to="/savedPosts">
+                  Saved items
                 </Link>
               </li>
               <li>
