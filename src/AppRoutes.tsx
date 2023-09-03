@@ -14,9 +14,15 @@ import axios from "axios";
 import { usePostsStore } from "./context/posts-store";
 import SavedPost from "./posts/components/SavedPost/SavedPost";
 import ProtectedRoute from "./ProtectedRoute";
+import Analytics from "./admin/Analytics";
+import { useAppStore } from "./hooks/useAppStore";
+import VerificationChart from "./admin/components/VerificationChart";
+import InteractionsChart from "./admin/components/InteractionsChart";
 
 export const AppRoutes: React.FC = () => {
   const { setAllPosts } = usePostsStore();
+  const { role } = useAppStore();
+  const isAdmin = role === "admin";
   useEffect(() => {
     const isDataStored = localStorage.getItem("dataStored");
     if (!isDataStored) {
@@ -61,6 +67,20 @@ export const AppRoutes: React.FC = () => {
         {
           path: "/savedPosts",
           element: <SavedPost />,
+        },
+        {
+          path: "analytics/",
+          element: isAdmin ? <Analytics /> : <PageNotFound />,
+          children: [
+            {
+              index: true,
+              element: <VerificationChart />,
+            },
+            {
+              path: "interactions",
+              element: <InteractionsChart />,
+            },
+          ],
         },
       ],
     },
