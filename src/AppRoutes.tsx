@@ -14,6 +14,10 @@ import axios from "axios";
 import { usePostsStore } from "./context/posts-store";
 import SavedPost from "./posts/components/SavedPost/SavedPost";
 import ProtectedRoute from "./ProtectedRoute";
+import Analytics from "./admin/Analytics";
+import VerificationChart from "./admin/components/VerificationChart";
+import InteractionsChart from "./admin/components/InteractionsChart";
+import Authorize from "./auth/Authorize/Authorize";
 
 export const AppRoutes: React.FC = () => {
   const { setAllPosts } = usePostsStore();
@@ -61,6 +65,24 @@ export const AppRoutes: React.FC = () => {
         {
           path: "/savedPosts",
           element: <SavedPost />,
+        },
+        {
+          path: "analytics/",
+          element: (
+            <Authorize allowedRoles={["admin"]}>
+              <Analytics />
+            </Authorize>
+          ),
+          children: [
+            {
+              index: true,
+              element: <VerificationChart />,
+            },
+            {
+              path: "interactions",
+              element: <InteractionsChart />,
+            },
+          ],
         },
       ],
     },

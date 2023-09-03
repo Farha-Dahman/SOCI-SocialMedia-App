@@ -11,10 +11,12 @@ import {
   faFilm,
   faImage,
   faFileLines,
+  faChartPie,
 } from "@fortawesome/free-solid-svg-icons";
 
 const menuItems: MenuItem[] = [
   { icon: faChartSimple, text: "Feed" },
+  { icon: faChartPie, text: "Analytics" },
   { icon: faUsers, text: "Friends" },
   { icon: faCalendar, text: "Events" },
   { icon: faFilm, text: "Watch Videos" },
