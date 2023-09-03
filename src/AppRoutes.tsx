@@ -15,14 +15,12 @@ import { usePostsStore } from "./context/posts-store";
 import SavedPost from "./posts/components/SavedPost/SavedPost";
 import ProtectedRoute from "./ProtectedRoute";
 import Analytics from "./admin/Analytics";
-import { useAppStore } from "./hooks/useAppStore";
 import VerificationChart from "./admin/components/VerificationChart";
 import InteractionsChart from "./admin/components/InteractionsChart";
+import Authorize from "./auth/Authorize/Authorize";
 
 export const AppRoutes: React.FC = () => {
   const { setAllPosts } = usePostsStore();
-  const { role } = useAppStore();
-  const isAdmin = role === "admin";
   useEffect(() => {
     const isDataStored = localStorage.getItem("dataStored");
     if (!isDataStored) {
@@ -70,7 +68,11 @@ export const AppRoutes: React.FC = () => {
         },
         {
           path: "analytics/",
-          element: isAdmin ? <Analytics /> : <PageNotFound />,
+          element: (
+            <Authorize allowedRoles={["admin"]}>
+              <Analytics />
+            </Authorize>
+          ),
           children: [
             {
               index: true,
