@@ -39,7 +39,7 @@ export const AppRoutes: React.FC = () => {
   }, []);
   const routers = createBrowserRouter([
     {
-      path: "",
+      path: "/",
       element: (
         <ProtectedRoute>
           <MasterLayout />
