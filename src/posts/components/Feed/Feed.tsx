@@ -7,12 +7,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const Feed: React.FC = () => {
-  const { allPosts, showVerifiedPosts, setShowVerifiedPosts, setAllPosts } = usePostsStore();
+  const { allPosts, showVerifiedPosts, setShowVerifiedPosts, setAllPosts } =
+    usePostsStore();
   const filteredPosts = showVerifiedPosts
     ? allPosts.filter((post: Post) => post.is_verified)
     : allPosts;
   const deletePost = (postId: number) => {
-    const updatedPosts = filteredPosts.filter((post) => post.user_id !== postId);
+    const updatedPosts = filteredPosts.filter(
+      (post: Post) => post.user_id !== postId,
+    );
     setAllPosts(updatedPosts);
   };
   return (

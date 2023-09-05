@@ -22,12 +22,12 @@ import Authorize from "../../../auth/Authorize/Authorize";
 import { usePostsStore } from "../../../context/posts-store";
 import { ConfirmDialog } from "primereact/confirmdialog";
 import { Toast } from "primereact/toast";
+import { Image } from "primereact/image";
 
 const PostDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const parsedId = +id!;
   const [post, setPost] = useState<Post | undefined>(undefined);
-  const [showImageOverlay, setShowImageOverlay] = useState(false);
   const [visible, setVisible] = useState(false);
   const { savedPosts, addSavedPost, removeSavedPost } = usePostsStore();
   const navigate = useNavigate();
@@ -38,7 +38,9 @@ const PostDetails: React.FC = () => {
     navigate("/");
   };
   const savedPostButton = (post: Post) => {
-    if (!savedPosts.some((savedPost) => savedPost.user_id === post.user_id)) {
+    if (
+      !savedPosts.some((savedPost: Post) => savedPost.user_id === post.user_id)
+    ) {
       addSavedPost(post);
       toast.current?.show({
         severity: "info",
@@ -98,21 +100,16 @@ const PostDetails: React.FC = () => {
           {post.image_url !== "" ? (
             <div className="col-sm-12 col-md-12 col-lg-7 bg-img-details ps-0">
               <div className="img-con justify-content-center align-items-center d-flex">
-                <img
-                  src={post.image_url}
-                  className="postDetails-image"
-                  alt="post image"
-                  onClick={() => setShowImageOverlay(true)}
-                />
-              </div>
-              {showImageOverlay && (
-                <div
-                  className="overlay"
-                  onClick={() => setShowImageOverlay(false)}
-                >
-                  <img src={post.image_url} alt="Post" />
+                <div className="card flex justify-content-center">
+                  <Image
+                    src={post.image_url}
+                    alt="post image"
+                    className="postDetails-image"
+                    width="250"
+                    preview
+                  />
                 </div>
-              )}
+              </div>
             </div>
           ) : (
             <></>
