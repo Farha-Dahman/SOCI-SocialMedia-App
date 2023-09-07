@@ -12,7 +12,11 @@ import { usePostsStore } from "../../../../context/posts-store";
 import { getAllPosts } from "../../../data-api";
 import dayjs from "dayjs";
 
-const PostsLists: React.FC<{ posts: Post[] }> = ({ posts }) => {
+export interface PostsListsType {
+  posts: Post[];
+  onDeletePost: (postId: number) => void;
+}
+const PostsLists: React.FC<PostsListsType> = ({ posts, onDeletePost }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [first, setFirst] = useState<number>(0);
   const [rows, setRows] = useState<number>(12);
@@ -22,7 +26,6 @@ const PostsLists: React.FC<{ posts: Post[] }> = ({ posts }) => {
   };
   const visiblePosts = posts.slice(first, first + rows);
   const { setAllPosts } = usePostsStore();
-
   const getPosts = async () => {
     try {
       const allPosts = (await getAllPosts()) || [];
@@ -43,14 +46,19 @@ const PostsLists: React.FC<{ posts: Post[] }> = ({ posts }) => {
   useEffect(() => {
     getPosts();
   }, []);
+
   return (
     <div className="post-content container p-0">
       <div className="row">
         {isLoading ? (
           <Loading />
         ) : (
-          visiblePosts.map((post, index) => (
-            <PostCard key={index} post={post} />
+          visiblePosts.map((post) => (
+            <PostCard
+              key={post.user_id}
+              post={post}
+              onDeletePost={onDeletePost}
+            />
           ))
         )}
       </div>

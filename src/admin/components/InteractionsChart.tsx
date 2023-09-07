@@ -7,6 +7,7 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  ResponsiveContainer,
 } from "recharts";
 import { getAllPosts } from "../../posts/data-api";
 import { Post } from "../../posts/types/types";
@@ -50,26 +51,26 @@ const InteractionsChart: React.FC = () => {
         <>
           <div className="text-center">
             <div className="justify-content-center d-flex border mt-5">
-              <LineChart
-                width={700}
-                height={400}
-                data={data}
-                margin={{ top: 20, right: 30, left: 20, bottom: 10 }}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis
-                  dataKey="timestamp"
-                  tickFormatter={(timestamp) => {
-                    const date = new Date(timestamp);
-                    return `${date.getMonth() + 1}/${date.getFullYear()}`;
-                  }}
-                />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="likes" stroke="#6d3dda" />
-                <Line type="monotone" dataKey="comments" stroke="#007bff9d" />
-              </LineChart>
+              <ResponsiveContainer width="100%" height={400}>
+                <LineChart
+                  data={data}
+                  margin={{ top: 20, right: 30, left: 20, bottom: 10 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis
+                    dataKey="timestamp"
+                    tickFormatter={(timestamp) => {
+                      const date = new Date(timestamp);
+                      return `${date.getMonth() + 1}/${date.getFullYear()}`;
+                    }}
+                  />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line type="monotone" dataKey="likes" stroke="#6d3dda" />
+                  <Line type="monotone" dataKey="comments" stroke="#007bff9d" />
+                </LineChart>
+              </ResponsiveContainer>
             </div>
             <h6 className="mt-3">Users Interactions Statistics</h6>
           </div>

@@ -1,4 +1,9 @@
+@import "../../../../assets/style/variables.scss";
+
 .paginator-controls {
     background-color: transparent;
     border: none;
+}
+.color-danger{
+    color: $color-danger !important;
 }

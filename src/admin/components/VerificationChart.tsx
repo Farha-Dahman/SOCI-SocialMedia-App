@@ -20,13 +20,10 @@ const VerificationChart: React.FC = () => {
     getPosts();
   }, []);
 
-  const verifiedUsers = allPosts.filter((post) => post.is_verified).length;
-  const notVerifiedUsers = allPosts.length - verifiedUsers;
-  const totalUsers = allPosts.length;
-
-  const verifiedPercentage = (verifiedUsers / totalUsers) * 100;
-  const notVerifiedPercentage = (notVerifiedUsers / totalUsers) * 100;
-
+  const verifiedPercentage =
+    (allPosts.filter((post) => post.is_verified).length / allPosts.length) *
+    100;
+  const notVerifiedPercentage = 100 - verifiedPercentage;
   const chartData = {
     series: [verifiedPercentage, notVerifiedPercentage],
     options: {
@@ -55,7 +52,6 @@ const VerificationChart: React.FC = () => {
             </div>
             <h6 className="mt-3">Verified Users Statistics</h6>
           </div>
-
           <div className="mt-5">
             <h5 className="mb-4">The Result:</h5>
             <div className="d-flex mb-2">

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getPost, removePost } from "../../data-api";
 import { Post } from "../../types/types";
@@ -19,26 +19,35 @@ import {
 import { FaRegHeart, FaRegComment, FaRegBookmark } from "react-icons/fa";
 import dayjs from "dayjs";
 import Authorize from "../../../auth/Authorize/Authorize";
-import { toast } from "react-toastify";
 import { usePostsStore } from "../../../context/posts-store";
+import { ConfirmDialog } from "primereact/confirmdialog";
+import { Toast } from "primereact/toast";
+import { Image } from "primereact/image";
 
 const PostDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const parsedId = +id!;
   const [post, setPost] = useState<Post | undefined>(undefined);
-  const [showImageOverlay, setShowImageOverlay] = useState(false);
+  const [visible, setVisible] = useState(false);
   const { savedPosts, addSavedPost, removeSavedPost } = usePostsStore();
   const navigate = useNavigate();
+  const toast = useRef<Toast>(null);
 
   const removePostButton = async (user_id: number) => {
     await removePost(user_id);
-    toast.success("The post has been successfully deleted!");
     navigate("/");
   };
   const savedPostButton = (post: Post) => {
-    if (!savedPosts.some((savedPost) => savedPost.user_id === post.user_id)) {
+    if (
+      !savedPosts.some((savedPost: Post) => savedPost.user_id === post.user_id)
+    ) {
       addSavedPost(post);
-      toast.success("The post has been successfully saved!");
+      toast.current?.show({
+        severity: "info",
+        summary: "Saved",
+        detail: "The post has been successfully saved!",
+        life: 3000,
+      });
     }
   };
   const unSavePost = (postId: number) => {
@@ -65,6 +74,25 @@ const PostDetails: React.FC = () => {
   const isPostSaved = savedPosts.some(
     (savedPost) => savedPost.user_id === post.user_id,
   );
+
+  const confirmDelete = () => {
+    removePostButton(post.user_id);
+    toast.current?.show({
+      severity: "info",
+      summary: "Deleted",
+      detail: "The post has been successfully deleted!",
+      life: 3000,
+    });
+  };
+  const cancelDelete = () => {
+    toast.current?.show({
+      severity: "warn",
+      summary: "Not Deleted",
+      detail: "This process not completed!",
+      life: 3000,
+    });
+  };
+
   return (
     <div className="mb-5 vh-lg-100 w-100">
       <div className="container-fluid desc mt-4 bg-details">
@@ -72,21 +100,16 @@ const PostDetails: React.FC = () => {
           {post.image_url !== "" ? (
             <div className="col-sm-12 col-md-12 col-lg-7 bg-img-details ps-0">
               <div className="img-con justify-content-center align-items-center d-flex">
-                <img
-                  src={post.image_url}
-                  className="postDetails-image"
-                  alt="post image"
-                  onClick={() => setShowImageOverlay(true)}
-                />
-              </div>
-              {showImageOverlay && (
-                <div
-                  className="overlay"
-                  onClick={() => setShowImageOverlay(false)}
-                >
-                  <img src={post.image_url} alt="Post" />
+                <div className="card flex justify-content-center">
+                  <Image
+                    src={post.image_url}
+                    alt="post image"
+                    className="postDetails-image"
+                    width="250"
+                    preview
+                  />
                 </div>
-              )}
+              </div>
             </div>
           ) : (
             <></>
@@ -141,6 +164,17 @@ const PostDetails: React.FC = () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="true"
                 />
+                <Toast ref={toast} />
+                <ConfirmDialog
+                  visible={visible}
+                  onHide={() => setVisible(false)}
+                  message="Are you sure you want to proceed?"
+                  header="Confirmation"
+                  icon="pi pi-exclamation-triangle"
+                  accept={confirmDelete}
+                  reject={cancelDelete}
+                  className="confirm-dialog"
+                />
                 <ul className="dropdown-menu">
                   <li>
                     {isPostSaved ? (
@@ -149,9 +183,13 @@ const PostDetails: React.FC = () => {
                         title="Unsave Post"
                         onClick={() => {
                           unSavePost(post.user_id);
-                          toast.success(
-                            "The post has been successfully deleted from saved items!",
-                          );
+                          toast.current?.show({
+                            severity: "info",
+                            summary: "Saved",
+                            detail:
+                              "The post has been successfully deleted from saved items!",
+                            life: 3000,
+                          });
                           navigate("/savedPosts");
                         }}
                       >
@@ -174,7 +212,7 @@ const PostDetails: React.FC = () => {
                       <button
                         className="dropdown-item"
                         title="Delete Post"
-                        onClick={() => removePostButton(post.user_id)}
+                        onClick={() => setVisible(true)}
                       >
                         <FontAwesomeIcon icon={faTrashCan} className="me-2" />
                         Delete Post
